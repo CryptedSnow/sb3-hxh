@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap-5.3.3.min.css">
+    <script src="/assets/bootstrap-5.3.3.min.js"></script>
+    <script src="/assets/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/assets/fontawesome.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Listar recompensados</title>
+</head>
+<body>
+    <h3>Listagem de recompensados</h3>
+    <hr>
+    <a href="/recompensados/form-create-recompensado" class="btn btn-success btn-sm mb-3"><i class="fa fa-plus"></i>&nbsp;Adicionar recompensado</a>
+    <a href="/recompensados/trash-list-recompensado" class="btn btn-danger btn-sm mb-3"><i class="fa fa-dumpster"></i>&nbsp;Lixeira de recompensados</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="recompensado : ${recompensados}">
+                <td th:text="${recompensado.id}"></td>
+                <td th:text="${recompensado.hunter_id}"></td>
+                <td th:text="${recompensado.recompensa_id}"></td>
+                <td th:text="${recompensado.status}"></td>
+                <td>
+                    <a th:href="@{'/recompensados/trash-recompensado/' + ${recompensado.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Lixeira</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap-5.3.3.min.css">
+    <script src="/assets/bootstrap-5.3.3.min.js"></script>
+    <script src="/assets/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/assets/fontawesome.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Listar Hunters</title>
+</head>
+<body>
+    <h3>Listagem de hunters</h3>
+    <hr>
+    <a href="/hunters/form-create-hunter" class="btn btn-success btn-sm mb-3"><i class="fa fa-plus"></i>&nbsp;Adicionar Hunter</a>
+    <a href="/hunters/trash-list-hunter" class="btn btn-danger btn-sm mb-3"><i class="fa fa-dumpster"></i>&nbsp;Lixeira de Hunters</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th>Tipo Hunter</th>
+                <th>Tipo Nen</th>
+                <th>Tipo Sanguineo</th>
+                <th>Início</th>
+                <th>Término</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="hunter : ${hunters}">
+                <td th:text="${hunter.id}"></td>
+                <td th:text="${hunter.nome_hunter}"></td>
+                <td th:text="${hunter.idade_hunter}"></td>
+                <td th:text="${hunter.altura_hunter}"></td>
+                <td th:text="${hunter.peso_hunter}"></td>
+                <td th:text="${hunter.tipo_hunter_id}"></td>
+                <td th:text="${hunter.tipo_nen_id}"></td>
+                <td th:text="${hunter.tipo_sanguineo_id}"></td>
+                <td th:text="${hunter.inicio}"></td>
+                <td th:text="${hunter.termino}"></td>
+                <td>
+                    <a th:href="@{'/hunters/form-update-hunter/' + ${hunter.id}}" class="btn btn-primary btn-sm"><i class="fa fa-arrows-rotate"></i>&nbsp;Atualizar</a>
+                    <a th:href="@{'/hunters/trash-hunter/' + ${hunter.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Lixeira</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

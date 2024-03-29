@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
+    <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
+    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/assets/mask.js}"></script>
+    <script th:src="@{/assets/fontawesome.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Criar recompensado</title>
+</head>
+<body>
+    <h3>Criar recompensado</h3>
+    <hr>
+    <a href="/recompensados/list" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+    <form th:action="@{/recompensados/create-recompensado}" th:object="${recompensado}" method="POST">
+
+        <label>Hunter:</label>
+        <select th:field="*{hunter_id}" class="form-control mb-4 w-25">
+            <option value="">Escolha um Hunter</option>
+            <option th:each="h : ${hunter}" th:value="${h.id}" th:text="${h.id}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('hunter_id')}" th:errors="*{hunter_id}" class="text-danger"></div>
+
+        <label>Tipo de Nen:</label>
+        <select th:field="*{recompensa_id}" class="form-control mb-4 w-25">
+            <option value="">Escolha uma recompensa</option>
+            <option th:each="r : ${recompensa}" th:value="${r.id}" th:text="${r.descricao_recompensa}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('recompensa_id')}" th:errors="*{recompensa_id}" class="text-danger"></div>
+
+        <label>Status:</label>
+        <input class="form-check-input" type="checkbox" th:field="*{status}" />
+        <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="text-danger"></div>
+
+        <br>
+
+        <button type="submit" class="btn btn-success col-2"><i class="fa fa-plus"></i>&nbsp;Cadastrar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
+    <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
+    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/assets/mask.js}"></script>
+    <script th:src="@{/assets/fontawesome.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Hunter</title>
+</head>
+<body>
+    <h3>Atualizar Hunter</h3>
+    <hr>
+    <a href="/hunters/list" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+    <form th:action="@{'/hunters/update-hunter/' + *{id}}" th:object="${hunter}" method="POST">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome_hunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('nome_hunter')}" th:errors="*{nome_hunter}" class="text-danger"></div>
+
+        <label>Idade:</label>
+        <input type="text" th:field="*{idade_hunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('idade_hunter')}" th:errors="*{idade_hunter}" class="text-danger"></div>
+
+        <label>Altura:</label>
+        <input type="text" th:field="*{altura_hunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('altura_hunter')}" th:errors="*{altura_hunter}" class="text-danger"></div>
+
+        <label>Peso:</label>
+        <input type="text" th:field="*{peso_hunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('peso_hunter')}" th:errors="*{peso_hunter}" class="text-danger"></div>
+
+        <label>Tipo de Hunter:</label>
+        <select th:field="*{tipo_hunter_id}" class="form-control mb-4 w-25">
+            <option value="">Escolha um tipo de Hunter</option>
+            <option th:each="th : ${tipo_hunter}" th:value="${th.id}" th:text="${th.descricao}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('tipo_hunter_id')}" th:errors="*{tipo_hunter_id}" class="text-danger"></div>
+
+        <label>Tipo de Nen:</label>
+        <select th:field="*{tipo_nen_id}" class="form-control mb-4 w-25">
+            <option value="">Escolha um tipo de Nen</option>
+            <option th:each="tn : ${tipo_nen}" th:value="${tn.id}" th:text="${tn.descricao}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('tipo_nen_id')}" th:errors="*{tipo_nen_id}" class="text-danger"></div>
+
+        <label>Tipo sanguíneo:</label>
+        <select th:field="*{tipo_sanguineo_id}" class="form-control mb-4 w-25">
+            <option value="">Escolha um tipo sanguíneo</option>
+            <option th:each="ts : ${tipo_sanguineo}" th:value="${ts.id}" th:text="${ts.descricao}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('tipo_sanguineo_id')}" th:errors="*{tipo_sanguineo_id}" class="text-danger"></div>
+
+        <label>Data de início:</label>
+        <input type="date" th:field="*{inicio}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}" class="text-danger"></div>
+
+        <label>Data de término:</label>
+        <input type="date" th:field="*{termino}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('termino')}" th:errors="*{termino}" class="text-danger"></div>
+
+        <button type="submit" class="btn btn-primary col-2"><i class="fa fa-arrows-rotate"></i>&nbsp;Atualizar</button>
+    </form>
+</body>
+</html>

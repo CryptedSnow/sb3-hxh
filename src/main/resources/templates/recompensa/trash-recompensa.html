@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap-5.3.3.min.css">
+    <script src="/assets/bootstrap-5.3.3.min.js"></script>
+    <script src="/assets/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/assets/fontawesome.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lixeira de recompensas</title>
+</head>
+<body>
+    <h3>Lixeira de recompensas</h3>
+    <hr>
+    <a href="/recompensas/list" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recompensa : ${recompensas}">
+            <td th:text="${recompensa.id}"></td>
+            <td th:text="${recompensa.descricao_recompensa}"></td>
+            <td th:text="${recompensa.valorRecompensaFormatado}"></td>
+            <td>
+                <a th:href="@{'/recompensas/restore-recompensa/' + ${recompensa.id}}" class="btn btn-primary btn-sm">Restaurar</a>
+                <a th:href="@{'/recompensas/delete-recompensa/' + ${recompensa.id}}" class="btn btn-danger btn-sm">Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

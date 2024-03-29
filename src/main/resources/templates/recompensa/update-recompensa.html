@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
+    <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
+    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/assets/mask.js}"></script>
+    <script th:src="@{/assets/fontawesome.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar recompensa</title>
+</head>
+<body>
+    <h3>Atualizar rcompensa</h3>
+    <hr>
+    <a href="/recompensas/list" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+    <form th:action="@{'/recompensas/update-recompensa/' + *{id}}" th:object="${recompensa}" method="POST">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Descricao:</label>
+        <input type="text" th:field="*{descricao_recompensa}" class="form-control mb-4 w-25" placeholder="Digite a descrição da recompensa"/>
+        <div th:if="${#fields.hasErrors('descricao_recompensa')}" th:errors="*{descricao_recompensa}" class="text-danger"></div>
+
+        <label>Valor:</label>
+        <input type="text" th:field="*{valor_recompensa}" class="form-control mb-4 w-25" placeholder="Digite o valor da recompensa"/>
+        <div th:if="${#fields.hasErrors('valor_recompensa')}" th:errors="*{valor_recompensa}" class="text-danger"></div>
+
+        <button type="submit" class="btn btn-primary col-2"><i class="fa fa-arrows-rotate"></i>&nbsp;Atualizar</button>
+    </form>
+</body>
+</html>
