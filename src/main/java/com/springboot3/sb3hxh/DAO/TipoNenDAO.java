@@ -1,12 +1,13 @@
 package com.springboot3.sb3hxh.DAO;
 
-import com.springboot3.sb3hxh.Model.TipoNenModel;
+import com.springboot3.sb3hxh.Entity.TipoNenEntity;
 
-import java.util.*;
+import java.util.List;
 
 public interface TipoNenDAO {
 
-    List<TipoNenModel> index();
-    TipoNenModel read(int id);
+    List<TipoNenEntity> index();
+    TipoNenEntity read(int id);
+    boolean existsId(String id);
 
 }

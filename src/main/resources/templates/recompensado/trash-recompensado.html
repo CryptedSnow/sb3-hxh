@@ -3,39 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="/assets/bootstrap-5.3.3.min.css">
-    <script src="/assets/bootstrap-5.3.3.min.js"></script>
-    <script src="/assets/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
+    <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
+    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/assets/mask.js}"></script>
     <script th:src="@{/assets/fontawesome.js}"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/favicon.ico">
     <title>Lixeira de recompensados</title>
 </head>
 <body>
+    <div th:if="${success_store}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <p th:text="${success_store}"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${success_update}" class="alert alert-info alert-dismissible fade show" role="alert">
+        <p th:text="${success_update}"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${success_delete}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p th:text="${success_delete}"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <h3>Lixeira de recompensados</h3>
     <hr>
     <a href="/recompensados/list" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+    <form th:action="@{/recompensados/filtrar-recompensado-trash}" th:value="${search}" method="get" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar nome do Hunter ou descrição da recompensa" name="search">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-magnifying-glass"></i>&nbsp;Buscar</button>
+        </div>
+    </form>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
-                <th>ID</th>
                 <th>Hunter</th>
                 <th>Recompensa</th>
+                <th>Valor</th>
                 <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
         <tr th:each="recompensado : ${recompensados}">
-            <td th:text="${recompensado.id}"></td>
-            <td th:text="${recompensado.hunter_id}"></td>
-            <td th:text="${recompensado.recompensa_id}"></td>
-            <td th:text="${recompensado.status}"></td>
+            <td th:text="${recompensado.hunter_id.nome_hunter}"></td>
+            <td th:text="${recompensado.recompensa_id.descricao_recompensa}"></td>
+            <td th:text="${recompensado.recompensa_id.valorRecompensaFormatado}"></td>
+            <td th:text="${recompensado.verificarStatus}"></td>
             <td>
-                <a th:href="@{'/recompensados/restore-recompensado/' + ${recompensado.id}}" class="btn btn-primary btn-sm">Restaurar</a>
-                <a th:href="@{'/recompensados/delete-recompensado/' + ${recompensado.id}}" class="btn btn-danger btn-sm">Deletar</a>
+                <a th:href="@{'/recompensados/restore-recompensado/' + ${recompensado.id}}" class="btn btn-primary btn-sm"><i class="fa fa-arrows-rotate"></i>&nbsp;Restaurar</a>
+                <!-- <a th:href="@{'/recompensados/delete-recompensado/' + ${recompensado.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Deletar</a> -->
             </td>
         </tr>
         </tbody>
     </table>
+    <div class="pagination justify-content-center" th:if="${totalPages > 0}">
+        <ul class="pagination">
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? ' active' : ''">
+                <a class="page-link" th:if="${search != null}" th:href="@{/recompensados/filtrar-recompensado-trash(search=${search}, page=${i}, size=${size})}">[[${i + 1}]]</a>
+                <a class="page-link" th:if="${search == null}" th:href="@{/recompensados/list(page=${i}, size=${size})}">[[${i + 1}]]</a>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
