@@ -26,6 +26,7 @@ public class HunterEntity {
 
     @NotNull(message = "A idade do Hunter é requerida")
     @Min(value = 13, message = "A idade do Hunter deve ser no mínimo de 13 anos")
+    @Max(value = 969, message = "A idade do Hunter deve ser no máximo de 969 anos")
     @Column(name="idade_hunter")
     private Integer idade_hunter;
 

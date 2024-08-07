@@ -7,6 +7,7 @@
     <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
     <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/assets/mask.js}"></script>
+    <script th:src="@{/assets/initialize-data-input-mask.js}"></script>
     <script th:src="@{/assets/fontawesome.js}"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="/favicon.ico">
@@ -23,7 +24,7 @@
         <div th:if="${#fields.hasErrors('descricao_recompensa')}" th:errors="*{descricao_recompensa}" class="text-danger"></div>
 
         <label>Valor:</label>
-        <input type="text" th:field="*{valor_recompensa}" class="form-control mb-4 w-25" placeholder="Digite o valor da recompensa"/>
+        <input type="text" th:field="*{valor_recompensa}" class="form-control mb-4 w-25" placeholder="Digite o valor da recompensa" data-inputmask="'alias': 'decimal', 'rightAlign': false, 'autoGroup': true, 'digitsOptional': false"/>
         <div th:if="${#fields.hasErrors('valor_recompensa')}" th:errors="*{valor_recompensa}" class="text-danger"></div>
 
         <button type="submit" class="btn btn-success col-2"><i class="fa fa-plus"></i>&nbsp;Cadastrar</button>
