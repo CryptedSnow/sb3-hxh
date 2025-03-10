@@ -1,4 +1,89 @@
-- Define settings database in ```application.properties``` (Check the database name, user and password of your preference)
+# Application (map)
+
+```
+sb3-hxh  
+├── src  
+    └── main  
+        ├── java  
+        │   └── com.springboot3.sb3hxh  
+        │       ├── Controller  
+        │       │   ├── HunterController.java  
+        │       │   ├── RecompensaController.java  
+        │       │   └── RecompensadoController.java  
+        │       ├── Converter  
+        │       │   ├── HunterConverter.java  
+        │       │   ├── RecompensaConverter.java  
+        │       │   ├── TipoHunterConverter.java  
+        │       │   ├── TipoNenConverter.java  
+        │       │   └── TipoSanguineoConverter.java  
+        │       ├── DAO  
+        │       │   ├── HunterDAO.java  
+        │       │   ├── RecompensaDAO.java  
+        │       │   ├── RecompensadoDAO.java  
+        │       │   ├── TipoHunterDAO.java  
+        │       │   ├── TipoNenDAO.java  
+        │       │   └── TipoSanguineoDAO.java  
+        │       ├── Entity  
+        │       │   ├── HunterEntity.java  
+        │       │   ├── RecompensadoEntity.java  
+        │       │   ├── RecompensaEntity.java  
+        │       │   ├── TipoHunterEntity.java  
+        │       │   ├── TipoNenEntity.java  
+        │       │   └── TipoSanguineoEntity.java  
+        │       ├── Service  
+        │       │   ├── HunterService.java  
+        │       │   ├── RecompensadoService.java  
+        │       │   ├── RecompensaService.java  
+        │       │   ├── TipoHunterService.java  
+        │       │   ├── TipoNenService.java  
+        │       │   └── TipoSanguineoService.java  
+        │       └── Validation  
+        │           ├── ConstraintValidation  
+        │           │   ├── HunterValidation.java  
+        │           │   ├── RecompensaConstraintValidation.java  
+        │           │   ├── TipoHunterConstraintValidation.java  
+        │           │   ├── TipoNenConstraintValidation.java  
+        │           │   └── TipoSanguineoConstraintValidation.java  
+        │           ├── HunterValidation.java  
+        │           ├── RecompensaValidation.java  
+        │           ├── RecompensadoValidation.java  
+        │           ├── TipoHunterValidation.java  
+        │           ├── TipoNenValidation.java  
+        │           └── TipoSanguineoValidation.java  
+        └── resources  
+            ├── templates  
+            └── application.properties  
+```
+
+It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version).
+
+### Application structure pattern
+
+See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier-architecture)**.
+
+1 - Presentation tier:
+* ```templates``` folder: Interface files from application.
+
+2 - Application tier:
+* ```Controller``` folder: HTTP requests.
+* ```Service``` folder: Logic of application methods.
+
+3 - Data tier:
+* ```DAO``` folder: Access the database.
+* ```Entity``` folder: Represent the database informations.
+
+4 - Foreign key converter
+* ```Converter``` folder: Use to define correctly foreign key value.
+
+5 - Exist validation
+* ```Validation folder``` folder: Create a validation to check existence of foreign keys.
+
+6 - Others files:
+* ```application.properties```: Application settings file.
+
+## Database
+
+- You can use ```PostgreSQL``` or ```MySQL``` database. Define settings database in ```application.properties``` (Check the database name, user and password of your preference)
 
 ```
 # PostgreSQL
