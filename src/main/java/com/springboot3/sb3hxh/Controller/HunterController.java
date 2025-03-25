@@ -119,7 +119,7 @@ public class HunterController {
             hunterService.update(hunterEntity);
             String nome = hunterEntity.getNomeHunter();
             log.info("Hunter {} obteve atualizações em suas informações.", nome);
-            redirectAttributes.addFlashAttribute("success_update", "Hunter" + nome + " foi atualizado no sistema.");
+            redirectAttributes.addFlashAttribute("success_update", "Hunter " + nome + " foi atualizado no sistema.");
             return "redirect:/hunters/list?page=0&size=5";
         }
     }

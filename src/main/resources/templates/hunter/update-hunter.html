@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
     <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
-    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
-    <script th:src="@{/assets/mask.js}"></script>
-    <script th:src="@{/assets/initialize-data-input-mask.js}"></script>
     <script th:src="@{/assets/fontawesome.js}"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="/favicon.ico">
@@ -25,15 +22,15 @@
         <div th:if="${#fields.hasErrors('nome_hunter')}" th:errors="*{nome_hunter}" class="text-danger"></div>
 
         <label>Idade:</label>
-        <input type="text" th:field="*{idade_hunter}" class="form-control mb-4 w-25" data-inputmask="'alias': 'numeric', 'rightAlign': false"/>
+        <input type="text" th:field="*{idade_hunter}" class="form-control mb-4 w-25"/>
         <div th:if="${#fields.hasErrors('idade_hunter')}" th:errors="*{idade_hunter}" class="text-danger"></div>
 
         <label>Altura:</label>
-        <input type="text" th:field="*{altura_hunter}" class="form-control mb-4 w-25" data-inputmask="'alias': 'decimal', 'rightAlign': false, 'autoGroup': true, 'digitsOptional': false"/>
+        <input type="text" th:field="*{altura_hunter}" class="form-control mb-4 w-25"/>
         <div th:if="${#fields.hasErrors('altura_hunter')}" th:errors="*{altura_hunter}" class="text-danger"></div>
 
         <label>Peso:</label>
-        <input type="text" th:field="*{peso_hunter}" class="form-control mb-4 w-25" data-inputmask="'alias': 'decimal', 'rightAlign': false, 'autoGroup': true, 'digitsOptional': false"/>
+        <input type="text" th:field="*{peso_hunter}" class="form-control mb-4 w-25"/>
         <div th:if="${#fields.hasErrors('peso_hunter')}" th:errors="*{peso_hunter}" class="text-danger"></div>
 
         <label>Tipo de Hunter:</label>

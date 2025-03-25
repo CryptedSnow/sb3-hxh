@@ -55,28 +55,28 @@ sb3-hxh
             └── application.properties  
 ```
 
-It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version).
+It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version).  Don't forget about to install ```Maven``` and ```Gradle``` also.
 
 ### Application structure pattern
 
 See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier-architecture)**.
 
 1 - Presentation tier:
-* ```templates``` folder: Interface files from application.
+* ```templates``` folder: Interface files from application (Because redirecting of ```Controller``` class).
 
 2 - Application tier:
-* ```Controller``` folder: HTTP requests.
-* ```Service``` folder: Logic of application methods.
+* ```Controller``` folder: HTTP requests (extends ```Entity, Service``` class).
+* ```Service``` folder: Logic of application methods (extends ```DAO, Entity``` class).
 
 3 - Data tier:
-* ```DAO``` folder: Access the database.
+* ```DAO``` folder: Access the database (extends ```Entity``` class).
 * ```Entity``` folder: Represent the database informations.
 
 4 - Foreign key converter
 * ```Converter``` folder: Use to define correctly foreign key value.
 
 5 - Exist validation
-* ```Validation folder``` folder: Create a validation to check existence of foreign keys.
+* ```Validation``` folder: Create a validation to check existence of foreign keys.
 
 6 - Others files:
 * ```application.properties```: Application settings file.
@@ -151,24 +151,6 @@ CREATE TABLE recompensados (
 	deleted_at TIMESTAMP,
 	FOREIGN KEY (hunter_id) REFERENCES hunters (id),
 	FOREIGN KEY (recompensa_id) REFERENCES recompensas (id)
-);
-
-CREATE TABLE tipos_hunters (
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(50) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE tipos_nens (
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(15) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE tipos_sanguineos (
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(3) NOT NULL,
-	deleted_at TIMESTAMP
 );
 ```
 

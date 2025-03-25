@@ -12,17 +12,17 @@ import java.util.Collections;
 public class IconConfiguration {
 
     @Bean
-    public SimpleUrlHandlerMapping customIcon () {
+    public SimpleUrlHandlerMapping customIcon() {
         SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
         simpleUrlHandlerMapping.setOrder(Integer.MIN_VALUE);
         simpleUrlHandlerMapping.setUrlMap(Collections.singletonMap("/static/favicon.ico", favIconRequest()));
         return simpleUrlHandlerMapping;
     }
 
+    @Bean
     protected ResourceHttpRequestHandler favIconRequest() {
         ResourceHttpRequestHandler resourceHttpRequestHandler = new ResourceHttpRequestHandler();
-        resourceHttpRequestHandler.setLocations(Collections.singletonList(new ClassPathResource("/")));
+        resourceHttpRequestHandler.setLocations(Collections.singletonList(new ClassPathResource("static/")));
         return resourceHttpRequestHandler;
     }
-
 }
