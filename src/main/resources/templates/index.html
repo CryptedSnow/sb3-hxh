@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
     <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
-    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
-    <script th:src="@{/assets/mask.js}"></script>
     <script th:src="@{/assets/fontawesome.js}"></script>
     <link rel="icon" href="/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,7 +17,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Hunters</h5>
-                        <a th:href="@{/hunters/list}" class="btn btn-warning">
+                        <a th:href="@{/hunters/list-hunters}" class="btn btn-warning">
                             <i class="fa fa-image-portrait"></i>&nbsp;Listar
                         </a>
                     </div>
@@ -29,7 +27,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Recompensas</h5>
-                        <a th:href="@{/recompensas/list}" class="btn btn-warning">
+                        <a th:href="@{/recompensas/list-recompensas}" class="btn btn-warning">
                             <i class="fa fa-sack-dollar"></i>&nbsp;Listar
                         </a>
                     </div>
@@ -39,7 +37,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Recompensados</h5>
-                        <a th:href="@{/recompensados/list}" class="btn btn-warning">
+                        <a th:href="@{/recompensados/list-recompensados}" class="btn btn-warning">
                             <i class="fa fa-hand-holding-dollar"></i>&nbsp;Listar
                         </a>
                     </div>

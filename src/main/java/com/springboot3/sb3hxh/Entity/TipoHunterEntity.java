@@ -2,16 +2,15 @@ package com.springboot3.sb3hxh.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity @Table(name="tipos_hunters") @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Entity
+@Table(name="tipos_hunters")
 public class TipoHunterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     @Column(name="id")
     private int id;
 
@@ -20,13 +19,39 @@ public class TipoHunterEntity {
     private String descricao;
 
     @Column(name = "deleted_at")
-    @Setter(AccessLevel.NONE)
     private LocalDateTime deleted_at;
 
-    public int getId() { return id; }
+    public TipoHunterEntity() {
 
-    public void setId(int id) { this.id = id; }
+    }
 
-    public void setDeletedAt(LocalDateTime deletedAt) { this.deleted_at = deletedAt; }
+    public TipoHunterEntity(int id, String descricao, LocalDateTime deleted_at) {
+        this.id = id;
+        this.descricao = descricao;
+        this.deleted_at = deleted_at;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public LocalDateTime getDeleted_at() {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(LocalDateTime deleted_at) {
+        this.deleted_at = deleted_at;
+    }
 }

@@ -3,16 +3,14 @@ package com.springboot3.sb3hxh.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-
 import java.time.LocalDateTime;
 
-@Entity @Table(name="recompensados") @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Entity
+@Table(name="recompensados")
 public class RecompensadoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     @Column(name="id")
     private int id;
 
@@ -31,17 +29,60 @@ public class RecompensadoEntity {
     private Boolean status;
 
     @Column(name = "deleted_at")
-    @Setter(AccessLevel.NONE)
     private LocalDateTime deleted_at;
 
-    public void setId(int id) { this.id = id; }
+    public RecompensadoEntity() {
 
-    public HunterEntity getHunter_id() { return hunter_id; }
+    }
 
-    public RecompensaEntity getRecompensa_id() { return recompensa_id; }
+    public RecompensadoEntity(int id, HunterEntity hunter_id, RecompensaEntity recompensa_id, Boolean status) {
+        this.id = id;
+        this.hunter_id = hunter_id;
+        this.recompensa_id = recompensa_id;
+        this.status = status;
+    }
 
-    public void setDeletedAt(LocalDateTime deletedAt) { this.deleted_at = deletedAt; }
+    public int getId() {
+        return id;
+    }
 
-    public String verificarStatus() { return status ? "Concluído" : "Não concluído"; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public HunterEntity getHunter_id() {
+        return hunter_id;
+    }
+
+    public void setHunter_id(HunterEntity hunter_id) {
+        this.hunter_id = hunter_id;
+    }
+
+    public RecompensaEntity getRecompensa_id() {
+        return recompensa_id;
+    }
+
+    public void setRecompensa_id(RecompensaEntity recompensa_id) {
+        this.recompensa_id = recompensa_id;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDeleted_at() {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(LocalDateTime deleted_at) {
+        this.deleted_at = deleted_at;
+    }
+
+    public String verificarStatus() {
+        return status ? "Concluído" : "Não concluído";
+    }
 }

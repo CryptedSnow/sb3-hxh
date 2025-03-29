@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" th:href="@{/assets/bootstrap-5.3.3.min.css}">
     <script th:src="@{/assets/bootstrap-5.3.3.min.js}"></script>
-    <script th:src="@{/assets/jquery-3.7.1.min.js}"></script>
-    <script th:src="@{/assets/mask.js}"></script>
     <script th:src="@{/assets/fontawesome.js}"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="/favicon.ico">
@@ -27,8 +25,8 @@
     </div>
     <h3>Lixeira de Hunters</h3>
     <hr>
-    <a href="/hunters/list" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-    <form th:action="@{/hunters/filtrar-hunter-trash}" th:value="${search}" method="get" class="mb-3">
+    <a href="/hunters/list-hunters" class="btn btn-secondary btn-sm mb-3"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+    <form th:action="@{/hunters/search-hunter-trash}" th:value="${search}" method="get" class="mb-3">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Buscar nome do Hunter" name="search">
             <button type="submit" class="btn btn-primary"><i class="fa fa-magnifying-glass"></i>&nbsp;Buscar</button>

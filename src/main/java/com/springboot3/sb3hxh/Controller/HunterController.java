@@ -37,8 +37,8 @@ public class HunterController {
         tipoSanguineoService = theTipoSanguineoService;
     }
 
-    @GetMapping("/list")
-    public String listarHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    @GetMapping("/list-hunters")
+    public String listHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Page<HunterEntity> hunterPage = hunterService.indexPagination(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
@@ -46,7 +46,7 @@ public class HunterController {
         return "/hunter/list-hunters";
     }
 
-    @GetMapping("/filtrar-hunter")
+    @GetMapping("/search-hunter")
     public String filtrarHunter(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<HunterEntity> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunter(search, page, size) : hunterService.indexPagination(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
@@ -83,7 +83,7 @@ public class HunterController {
             return "/hunter/create-hunter";
         } else {
             hunterService.create(hunterEntity);
-            String nome = hunterEntity.getNomeHunter();
+            String nome = hunterEntity.getNome_hunter();
             log.info("Hunter {} está presente no sistema.", nome);
             redirectAttributes.addFlashAttribute("success_store", "Hunter " + nome + " está presente no sistema.");
             return "redirect:/hunters/list?page=0&size=5";
@@ -117,7 +117,7 @@ public class HunterController {
         } else {
             hunterEntity.setId(id);
             hunterService.update(hunterEntity);
-            String nome = hunterEntity.getNomeHunter();
+            String nome = hunterEntity.getNome_hunter();
             log.info("Hunter {} obteve atualizações em suas informações.", nome);
             redirectAttributes.addFlashAttribute("success_update", "Hunter " + nome + " foi atualizado no sistema.");
             return "redirect:/hunters/list?page=0&size=5";
@@ -127,7 +127,7 @@ public class HunterController {
     @GetMapping("/trash-hunter/{id}")
     public String trashHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         HunterEntity hunterEntity = hunterService.read(id);
-        String nome = hunterEntity.getNomeHunter();
+        String nome = hunterEntity.getNome_hunter();
         hunterService.trash(id);
         log.info("Hunter {} foi enviado(a) para a lixeira.", nome);
         redirectAttributes.addFlashAttribute("success_delete", "Hunter " + nome + " está na lixeira.");
@@ -135,7 +135,7 @@ public class HunterController {
     }
 
     @GetMapping("/trash-list-hunter")
-    public String listarTrashHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String listTrashHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<HunterEntity> hunterPage = hunterService.indexTrash(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
@@ -143,8 +143,8 @@ public class HunterController {
         return "/hunter/trash-hunter";
     }
 
-    @GetMapping("/filtrar-hunter-trash")
-    public String filtrarHunterTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    @GetMapping("/search-hunter-trash")
+    public String searchHunterTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<HunterEntity> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunterTrash(search, page, size) : hunterService.indexTrash(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
@@ -157,7 +157,7 @@ public class HunterController {
     @GetMapping("/restore-hunter/{id}")
     public String restoreHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         HunterEntity hunterEntity = hunterService.read(id);
-        String nome = hunterEntity.getNomeHunter();
+        String nome = hunterEntity.getNome_hunter();
         hunterService.restore(id);
         log.info("Hunter {} foi restaurado(a) para a listagem principal.", nome);
         redirectAttributes.addFlashAttribute("success_store", "Hunter " + nome + " foi restaurado para a listagem principal.");
@@ -167,7 +167,7 @@ public class HunterController {
     @GetMapping("/delete-hunter/{id}")
     public String deleteHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         HunterEntity hunterEntity = hunterService.read(id);
-        String nome = hunterEntity.getNomeHunter();
+        String nome = hunterEntity.getNome_hunter();
         hunterService.delete(id);
         log.info("Hunter {} foi excluído(a) permanentemente.", nome);
         redirectAttributes.addFlashAttribute("success_delete", "Hunter " + nome + " foi excluído do sistema.");

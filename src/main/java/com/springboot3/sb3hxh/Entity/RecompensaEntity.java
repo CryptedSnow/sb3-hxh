@@ -5,19 +5,18 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
-@Entity @Table(name="recompensas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Entity
+@Table(name="recompensas")
 public class RecompensaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     @Column(name="id")
     private int id;
 
@@ -32,16 +31,50 @@ public class RecompensaEntity {
     private Float valor_recompensa;
 
     @Column(name = "deleted_at")
-    @Setter(AccessLevel.NONE)
     private LocalDateTime deleted_at;
 
-    public int getId() { return id; }
+    public RecompensaEntity() {
 
-    public void setId(int id) { this.id = id; }
+    }
 
-    public String getDescricaoRecompensa() { return descricao_recompensa; }
+    public RecompensaEntity(int id, String descricao_recompensa, Float valor_recompensa, LocalDateTime deleted_at) {
+        this.id = id;
+        this.descricao_recompensa = descricao_recompensa;
+        this.valor_recompensa = valor_recompensa;
+        this.deleted_at = deleted_at;
+    }
 
-    public void setDeletedAt(LocalDateTime deletedAt) { this.deleted_at = deletedAt; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescricao_recompensa() {
+        return descricao_recompensa;
+    }
+
+    public void setDescricao_recompensa(String descricao_recompensa) {
+        this.descricao_recompensa = descricao_recompensa;
+    }
+
+    public Float getValor_recompensa() {
+        return valor_recompensa;
+    }
+
+    public void setValor_recompensa(Float valor_recompensa) {
+        this.valor_recompensa = valor_recompensa;
+    }
+
+    public LocalDateTime getDeleted_at() {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(LocalDateTime deleted_at) {
+        this.deleted_at = deleted_at;
+    }
 
     public String valorRecompensaFormatado() {
         NumberFormat format = DecimalFormat.getCurrencyInstance(new Locale("pt", "BR"));

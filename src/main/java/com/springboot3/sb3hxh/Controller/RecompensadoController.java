@@ -34,8 +34,8 @@ public class RecompensadoController {
         recompensaService = theRecompensaService;
     }
 
-    @GetMapping("/list")
-    public String listarRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    @GetMapping("/list-recompensados")
+    public String listRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensadoEntity> recompensadoPage = recompensadoService.indexPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
@@ -44,7 +44,7 @@ public class RecompensadoController {
     }
 
     @GetMapping("/filtrar-recompensado")
-    public String filtrarRecompensado(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String searchRecompensado(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensadoEntity> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.searchRecompensado(search, page, size) : recompensadoService.indexPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
@@ -174,7 +174,7 @@ public class RecompensadoController {
     }
 
     @GetMapping("/trash-list-recompensado")
-    public String listarTrashRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String listTrashRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensadoEntity> recompensadoPage = recompensadoService.indexTrash(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
@@ -183,7 +183,7 @@ public class RecompensadoController {
     }
 
     @GetMapping("/filtrar-recompensado-trash")
-    public String filtrarRecompensadoTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String searchRecompensadoTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensadoEntity> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.searchRecompensadoTrash(search, page, size) : recompensadoService.indexTrash(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());

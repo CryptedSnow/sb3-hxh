@@ -93,7 +93,7 @@ public class HunterService implements HunterDAO {
     public void trash(int id) {
         HunterEntity hunterEntity = entityManager.find(HunterEntity.class, id);
         if (hunterEntity != null) {
-            hunterEntity.setDeletedAt(LocalDateTime.now());
+            hunterEntity.setDeleted_at(LocalDateTime.now());
             entityManager.merge(hunterEntity);
         }
     }
@@ -137,7 +137,7 @@ public class HunterService implements HunterDAO {
     public HunterEntity restore(int id) {
         HunterEntity hunterEntity = entityManager.find(HunterEntity.class, id);
         if (hunterEntity != null) {
-            hunterEntity.setDeletedAt(null);
+            hunterEntity.setDeleted_at(null);
             entityManager.persist(hunterEntity);
         } else {
             throw new IllegalArgumentException("Registro não encontrado com o ID fornecido: " + id);

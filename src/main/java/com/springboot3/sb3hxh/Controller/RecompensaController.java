@@ -23,8 +23,8 @@ public class RecompensaController {
         recompensaService = theRecompensaService;
     }
 
-    @GetMapping("/list")
-    public String listarRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    @GetMapping("/list-recompensas")
+    public String listRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensaEntity> recompensaPage = recompensaService.indexPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
@@ -32,8 +32,8 @@ public class RecompensaController {
         return "/recompensa/list-recompensas";
     }
 
-    @GetMapping("/filtrar-recompensa")
-    public String filtrarRecompensa(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    @GetMapping("/search-recompensa")
+    public String searchRecompensa(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensaEntity> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensa(search, page, size) : recompensaService.indexPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
@@ -58,7 +58,7 @@ public class RecompensaController {
             return "/recompensa/create-recompensa";
         } else {
             recompensaService.create(recompensaEntity);
-            String descricao = recompensaEntity.getDescricaoRecompensa();
+            String descricao = recompensaEntity.getDescricao_recompensa();
             log.info("Recompensa {} está presente no sistema", descricao);
             redirectAttributes.addFlashAttribute("success_store", "Recompensa " + descricao + " está presente no sistema.");
             return "redirect:/recompensas/list?page=0&size=5";
@@ -84,7 +84,7 @@ public class RecompensaController {
         } else {
             recompensaEntity.setId(id);
             recompensaService.update(recompensaEntity);
-            String descricao = recompensaEntity.getDescricaoRecompensa();
+            String descricao = recompensaEntity.getDescricao_recompensa();
             log.info("Recompensa {} obteve atualizações em suas informações.", descricao);
             redirectAttributes.addFlashAttribute("success_update", "Recompensa " + descricao + " foi atualizada no sistema.");
             return "redirect:/recompensas/list?page=0&size=5";
@@ -94,7 +94,7 @@ public class RecompensaController {
     @GetMapping("/trash-recompensa/{id}")
     public String trashRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         RecompensaEntity recompensaEntity = recompensaService.read(id);
-        String descricao = recompensaEntity.getDescricaoRecompensa();
+        String descricao = recompensaEntity.getDescricao_recompensa();
         recompensaService.trash(id);
         log.info("Recompensa {} foi enviada para a lixeira.", descricao);
         redirectAttributes.addFlashAttribute("success_delete", "Recompensa " + descricao + " está na lixeira.");
@@ -102,7 +102,7 @@ public class RecompensaController {
     }
 
     @GetMapping("/trash-list-recompensa")
-    public String listarTrashRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String listTrashRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensaEntity> recompensaPage = recompensaService.indexTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
@@ -110,7 +110,7 @@ public class RecompensaController {
         return "/recompensa/trash-recompensa";
     }
 
-    @GetMapping("/filtrar-recompensa-trash")
+    @GetMapping("/search-recompensa-trash")
     public String filtrarRecompensaTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<RecompensaEntity> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensaTrash(search, page, size) : recompensaService.indexTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
@@ -124,7 +124,7 @@ public class RecompensaController {
     @GetMapping("/restore-recompensa/{id}")
     public String restoreRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         RecompensaEntity recompensaEntity = recompensaService.read(id);
-        String descricao = recompensaEntity.getDescricaoRecompensa();
+        String descricao = recompensaEntity.getDescricao_recompensa();
         recompensaService.restore(id);
         log.info("Recompensa {} foi restaurada para a listagem principal.", descricao);
         redirectAttributes.addFlashAttribute("success_store", "Recompensa " + descricao + " foi restaurada para a listagem principal.");
@@ -134,7 +134,7 @@ public class RecompensaController {
     @GetMapping("/delete-recompensa/{id}")
     public String deleteRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         RecompensaEntity recompensaEntity = recompensaService.read(id);
-        String descricao = recompensaEntity.getDescricaoRecompensa();
+        String descricao = recompensaEntity.getDescricao_recompensa();
         recompensaService.delete(id);
         log.info("Recompensa {} foi excluída permanentemente.", descricao);
         redirectAttributes.addFlashAttribute("success_delete", "Recompensa " + descricao + " foi excluída do sistema.");

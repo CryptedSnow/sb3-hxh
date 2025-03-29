@@ -1,7 +1,7 @@
 package com.springboot3.sb3hxh.Service;
 
-import com.springboot3.sb3hxh.DAO.*;
-import com.springboot3.sb3hxh.Entity.*;
+import com.springboot3.sb3hxh.DAO.TipoHunterDAO;
+import com.springboot3.sb3hxh.Entity.TipoHunterEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
