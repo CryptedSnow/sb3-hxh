@@ -55,7 +55,7 @@ sb3-hxh
             └── application.properties  
 ```
 
-It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version).  Don't forget about to install ```Maven``` and ```Gradle``` also.
+It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to use [IntelliJ IDEA](https://www.jetbrains.com/idea/) to facilitate your experience.
 
 ### Application structure pattern
 
@@ -99,7 +99,39 @@ spring.datasource.mysql.password=
 spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
 
-- Create table to **PostgreSQL** database
+- If you want use ```Docker``` to insert the lines:
+
+```
+# MySQL
+spring.datasource.mysql.url=jdbc:mysql://localhost:3306/sb3-hxh
+spring.datasource.mysql.username=user
+spring.datasource.mysql.password=password
+spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5432/sb3-hxh
+spring.datasource.username=user
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.postgresql.Driver
+```
+
+### Panels
+
+- phpMyAdmin: http://localhost:8081
+    - User: ```user```
+    - Password: ```password```
+- pgAdmin: http://localhost:8082
+    - User: ```admin@admin.com```
+    - Password: ```admin```
+
+To create a server to pgAdmin:
+- Host name/address: ```postgres```
+- Port: ```5432```
+- Maintenance database:	```postgres```
+- Username:	```user```
+- Password:	```password```
+
+Create table to **PostgreSQL** database:
 ```
 CREATE TABLE tipos_hunters (
 	id SERIAL PRIMARY KEY,
@@ -154,7 +186,7 @@ CREATE TABLE recompensados (
 );
 ```
 
-- Create tables to **MySQL** database
+Create tables to **MySQL** database:
 ```
 CREATE TABLE tipos_hunters (
 	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -209,7 +241,7 @@ CREATE TABLE recompensados (
 );
 ```
 
-- Insert commands
+Insert commands:
 ```
 INSERT INTO tipos_hunters (descricao) VALUES
 ('Hunter Gourmet'),
