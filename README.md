@@ -189,25 +189,25 @@ CREATE TABLE recompensados (
 Create tables to **MySQL** database:
 ```
 CREATE TABLE tipos_hunters (
-	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	descricao VARCHAR(50) NOT NULL,
 	deleted_at TIMESTAMP
 );
 
 CREATE TABLE tipos_nens (
-	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	descricao VARCHAR(15) NOT NULL,
 	deleted_at TIMESTAMP
 );
 
 CREATE TABLE tipos_sanguineos (
-	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	descricao VARCHAR(3) NOT NULL,
 	deleted_at TIMESTAMP
 );
 
 CREATE TABLE hunters (
-	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome_hunter VARCHAR(50) NOT NULL,
 	idade_hunter INT NOT NULL,
 	altura_hunter DECIMAL(3,2) NOT NULL,
@@ -224,14 +224,14 @@ CREATE TABLE hunters (
 );
 
 CREATE TABLE recompensas (
-	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	descricao_recompensa VARCHAR(255) NOT NULL,
 	valor_recompensa DECIMAL(10,2) NOT NULL,
 	deleted_at TIMESTAMP
 );
 
 CREATE TABLE recompensados (
-	id PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	hunter_id INT NOT NULL,
 	recompensa_id INT NOT NULL,
 	status BOOLEAN NOT NULL,
