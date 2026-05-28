@@ -61,7 +61,7 @@ public class RecompensaController {
             String descricao = recompensaEntity.getDescricao_recompensa();
             log.info("Recompensa {} está presente no sistema", descricao);
             redirectAttributes.addFlashAttribute("success_store", "Recompensa " + descricao + " está presente no sistema.");
-            return "redirect:/recompensas/list?page=0&size=5";
+            return "redirect:/recompensas/list-recompensas?page=0&size=5";
         }
     }
 
@@ -72,7 +72,7 @@ public class RecompensaController {
             model.addAttribute("recompensa", recompensaEntity);
             return "/recompensa/update-recompensa";
         } else {
-            return "redirect:/recompensas/list?page=0&size=5";
+            return "redirect:/recompensas/list-recompensas?page=0&size=5";
         }
     }
 
@@ -87,7 +87,7 @@ public class RecompensaController {
             String descricao = recompensaEntity.getDescricao_recompensa();
             log.info("Recompensa {} obteve atualizações em suas informações.", descricao);
             redirectAttributes.addFlashAttribute("success_update", "Recompensa " + descricao + " foi atualizada no sistema.");
-            return "redirect:/recompensas/list?page=0&size=5";
+            return "redirect:/recompensas/list-recompensas?page=0&size=5";
         }
     }
 
@@ -98,7 +98,7 @@ public class RecompensaController {
         recompensaService.trash(id);
         log.info("Recompensa {} foi enviada para a lixeira.", descricao);
         redirectAttributes.addFlashAttribute("success_delete", "Recompensa " + descricao + " está na lixeira.");
-        return "redirect:/recompensas/list?page=0&size=5";
+        return "redirect:/recompensas/list-recompensas?page=0&size=5";
     }
 
     @GetMapping("/trash-list-recompensa")

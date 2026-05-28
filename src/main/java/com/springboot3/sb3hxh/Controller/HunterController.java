@@ -86,7 +86,7 @@ public class HunterController {
             String nome = hunterEntity.getNome_hunter();
             log.info("Hunter {} está presente no sistema.", nome);
             redirectAttributes.addFlashAttribute("success_store", "Hunter " + nome + " está presente no sistema.");
-            return "redirect:/hunters/list?page=0&size=5";
+            return "redirect:/hunters/list-hunters?page=0&size=5";
         }
     }
 
@@ -100,7 +100,7 @@ public class HunterController {
         model.addAttribute("tipo_hunter", tipoHunterEntity);
         model.addAttribute("tipo_nen", tipoNenEntity);
         model.addAttribute("tipo_sanguineo", tipoSanguineoEntity);
-        return hunterEntity != null ? "/hunter/update-hunter" : "redirect:/hunters/list?page=0&size=5";
+        return hunterEntity != null ? "/hunter/update-hunter" : "redirect:/hunters/list-hunters?page=0&size=5";
     }
 
     @PostMapping("/update-hunter/{id}")
@@ -120,7 +120,7 @@ public class HunterController {
             String nome = hunterEntity.getNome_hunter();
             log.info("Hunter {} obteve atualizações em suas informações.", nome);
             redirectAttributes.addFlashAttribute("success_update", "Hunter " + nome + " foi atualizado no sistema.");
-            return "redirect:/hunters/list?page=0&size=5";
+            return "redirect:/hunters/list-hunters?page=0&size=5";
         }
     }
 
@@ -131,7 +131,7 @@ public class HunterController {
         hunterService.trash(id);
         log.info("Hunter {} foi enviado(a) para a lixeira.", nome);
         redirectAttributes.addFlashAttribute("success_delete", "Hunter " + nome + " está na lixeira.");
-        return "redirect:/hunters/list?page=0&size=5";
+        return "redirect:/hunters/list-hunters?page=0&size=5";
     }
 
     @GetMapping("/trash-list-hunter")

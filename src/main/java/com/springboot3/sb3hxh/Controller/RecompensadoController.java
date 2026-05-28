@@ -104,7 +104,7 @@ public class RecompensadoController {
             recompensadoService.create(recompensadoEntity);
             log.info("Recompensado(a) está presente no sistema.");
             redirectAttributes.addFlashAttribute("success_store", "Recompensado está presente no sistema.");
-            return "redirect:/recompensados/list?page=0&size=5";
+            return "redirect:/recompensados/list-recompensados?page=0&size=5";
         }
     }
 
@@ -129,7 +129,7 @@ public class RecompensadoController {
         model.addAttribute("recompensado", recompensadoEntity);
         model.addAttribute("hunter", hunterEntity);
         model.addAttribute("recompensa", recompensasDisponiveis);
-        return recompensadoEntity != null ? "/recompensado/update-recompensado" : "redirect:/recompensados/list?page=0&size=5";
+        return recompensadoEntity != null ? "/recompensado/update-recompensado" : "redirect:/recompensados/list-recompensados?page=0&size=5";
     }
 
     @PostMapping("/update-recompensados/{id}")
@@ -160,7 +160,7 @@ public class RecompensadoController {
             String recompensado = recompensadoService.showRecompensado(id);
             log.info("Recompensado(a) {} obteve atualizações em suas informações.", recompensadoEntity);
             redirectAttributes.addFlashAttribute("success_update", "Recompensado foi atualizado no sistema.");
-            return "redirect:/recompensados/list?page=0&size=5";
+            return "redirect:/recompensados/list-recompensados?page=0&size=5";
         }
     }
 
@@ -170,7 +170,7 @@ public class RecompensadoController {
         recompensadoService.trash(id);
         log.info("Recompensado(a) {} foi enviado(a) para a lixeira.", recompensado);
         redirectAttributes.addFlashAttribute("success_delete", "Recompensado " + recompensado + " está na lixeira.");
-        return "redirect:/recompensados/list?page=0&size=5";
+        return "redirect:/recompensados/list-recompensados?page=0&size=5";
     }
 
     @GetMapping("/trash-list-recompensado")
