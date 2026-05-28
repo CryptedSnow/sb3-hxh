@@ -1,6 +1,17 @@
-version: '3.8'
-
 services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sb3-hxh-app
+    depends_on:
+      - mysql
+      - pgsql
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
 
   mysql:
     image: mysql:8.0
@@ -15,6 +26,8 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -26,6 +39,10 @@ services:
       PMA_HOST: mysql
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
+    depends_on:
+      - mysql
+    networks:
+      - app-network
 
   pgsql:
     image: postgres:17
@@ -39,6 +56,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -51,6 +70,14 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - pgsql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   mysql_data:
