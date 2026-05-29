@@ -1,6 +1,6 @@
 package com.springboot3.sb3hxh.Validation.ConstraintValidation;
 
-import com.springboot3.sb3hxh.Entity.RecompensaEntity;
+import com.springboot3.sb3hxh.Entity.Recompensa;
 import com.springboot3.sb3hxh.Service.RecompensaService;
 import com.springboot3.sb3hxh.Validation.RecompensaValidation;
 import jakarta.validation.ConstraintValidator;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecompensaConstraintValidation implements ConstraintValidator<RecompensaValidation, RecompensaEntity> {
+public class RecompensaConstraintValidation implements ConstraintValidator<RecompensaValidation, Recompensa> {
 
     @Autowired
     private RecompensaService recompensaService;
@@ -19,7 +19,7 @@ public class RecompensaConstraintValidation implements ConstraintValidator<Recom
     }
 
     @Override
-    public boolean isValid(RecompensaEntity recompensaEntity, ConstraintValidatorContext context) {
+    public boolean isValid(Recompensa recompensaEntity, ConstraintValidatorContext context) {
         if (recompensaEntity == null) {
             return false;
         }

@@ -1,26 +1,24 @@
 package com.springboot3.sb3hxh.Converter;
 
-import com.springboot3.sb3hxh.Entity.TipoSanguineoEntity;
-import com.springboot3.sb3hxh.Service.TipoSanguineoService;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import com.springboot3.sb3hxh.Enum.TipoSanguineoEnum;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
-@Component
-public class TipoSanguineoConverter implements Converter<String, TipoSanguineoEntity> {
+@Converter(autoApply = false)
+public class TipoSanguineoConverter implements AttributeConverter<TipoSanguineoEnum, String> {
 
-    private final TipoSanguineoService tipoSanguineoService;
-
-    public TipoSanguineoConverter(TipoSanguineoService tipoSanguineoService) {
-        this.tipoSanguineoService = tipoSanguineoService;
+    @Override
+    public String convertToDatabaseColumn(TipoSanguineoEnum attribute) {
+        if (attribute == null) return null;
+        return attribute.getDescricao();
     }
 
     @Override
-    public TipoSanguineoEntity convert(String source) {
-        if (source.isEmpty()) {
-            return null;
+    public TipoSanguineoEnum convertToEntityAttribute(String dbData) {
+        if (dbData == null) return null;
+        for (TipoSanguineoEnum tipoSanguineo : TipoSanguineoEnum.values()) {
+            if (tipoSanguineo.getDescricao().equals(dbData)) return tipoSanguineo;
         }
-        int id = Integer.parseInt(source);
-        return tipoSanguineoService.read(id);
+        throw new IllegalArgumentException("Tipo sanguíneo desconhecido: " + dbData);
     }
-
 }

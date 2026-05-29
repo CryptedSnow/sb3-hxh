@@ -1,26 +1,24 @@
 package com.springboot3.sb3hxh.Converter;
 
-import com.springboot3.sb3hxh.Entity.TipoHunterEntity;
-import com.springboot3.sb3hxh.Service.TipoHunterService;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import com.springboot3.sb3hxh.Enum.TipoHunterEnum;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
-@Component
-public class TipoHunterConverter implements Converter<String, TipoHunterEntity> {
+@Converter(autoApply = false)
+public class TipoHunterConverter implements AttributeConverter<TipoHunterEnum, String> {
 
-    private final TipoHunterService tipoHunterService;
-
-    public TipoHunterConverter(TipoHunterService tipoHunterService) {
-        this.tipoHunterService = tipoHunterService;
+    @Override
+    public String convertToDatabaseColumn(TipoHunterEnum attribute) {
+        if (attribute == null) return null;
+        return attribute.getDescricao();
     }
 
     @Override
-    public TipoHunterEntity convert(String source) {
-        if (source.isEmpty()) {
-            return null;
+    public TipoHunterEnum convertToEntityAttribute(String dbData) {
+        if (dbData == null) return null;
+        for (TipoHunterEnum tipoHunter : TipoHunterEnum.values()) {
+            if (tipoHunter.getDescricao().equals(dbData)) return tipoHunter;
         }
-        int id = Integer.parseInt(source);
-        return tipoHunterService.read(id);
+        throw new IllegalArgumentException("Tipo de Hunter desconhecido: " + dbData);
     }
-
 }

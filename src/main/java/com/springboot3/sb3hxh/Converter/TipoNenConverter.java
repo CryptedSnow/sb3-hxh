@@ -1,26 +1,24 @@
 package com.springboot3.sb3hxh.Converter;
 
-import com.springboot3.sb3hxh.Entity.TipoNenEntity;
-import com.springboot3.sb3hxh.Service.TipoNenService;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import com.springboot3.sb3hxh.Enum.TipoNenEnum;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
-@Component
-public class TipoNenConverter implements Converter<String, TipoNenEntity>  {
+@Converter(autoApply = false)
+public class TipoNenConverter implements AttributeConverter<TipoNenEnum, String> {
 
-    private final TipoNenService tipoNenService;
-
-    public TipoNenConverter(TipoNenService tipoNenService) {
-        this.tipoNenService = tipoNenService;
+    @Override
+    public String convertToDatabaseColumn(TipoNenEnum attribute) {
+        if (attribute == null) return null;
+        return attribute.getDescricao();
     }
 
     @Override
-    public TipoNenEntity convert(String source) {
-        if (source.isEmpty()) {
-            return null;
+    public TipoNenEnum convertToEntityAttribute(String dbData) {
+        if (dbData == null) return null;
+        for (TipoNenEnum tipoNen : TipoNenEnum.values()) {
+            if (tipoNen.getDescricao().equals(dbData)) return tipoNen;
         }
-        int id = Integer.parseInt(source);
-        return tipoNenService.read(id);
+        throw new IllegalArgumentException("Tipo de Nen desconhecido: " + dbData);
     }
-
 }

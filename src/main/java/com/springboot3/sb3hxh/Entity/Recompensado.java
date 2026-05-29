@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="recompensados")
-public class RecompensadoEntity {
+public class Recompensado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +17,12 @@ public class RecompensadoEntity {
     @OneToOne
     @NotNull(message = "Hunter é requerido")
     @JoinColumn(name="hunter_id", referencedColumnName="id")
-    private HunterEntity hunter_id;
+    private Hunter hunterId;
 
     @OneToOne
     @NotNull(message = "Recompensa é requerida")
     @JoinColumn(name="recompensa_id", referencedColumnName="id")
-    private RecompensaEntity recompensa_id;
+    private Recompensa recompensaId;
 
     @AssertTrue(message = "O status do recompensado é requerido")
     @Column(name="status")
@@ -31,14 +31,14 @@ public class RecompensadoEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
 
-    public RecompensadoEntity() {
+    public Recompensado() {
 
     }
 
-    public RecompensadoEntity(int id, HunterEntity hunter_id, RecompensaEntity recompensa_id, Boolean status) {
+    public Recompensado(int id, Hunter hunter_id, Recompensa recompensa_id, Boolean status) {
         this.id = id;
-        this.hunter_id = hunter_id;
-        this.recompensa_id = recompensa_id;
+        this.hunterId = hunter_id;
+        this.recompensaId = recompensa_id;
         this.status = status;
     }
 
@@ -50,20 +50,20 @@ public class RecompensadoEntity {
         this.id = id;
     }
 
-    public HunterEntity getHunterId() {
-        return hunter_id;
+    public Hunter getHunterId() {
+        return hunterId;
     }
 
-    public void setHunterId(HunterEntity hunter_id) {
-        this.hunter_id = hunter_id;
+    public void setHunterId(Hunter hunter_id) {
+        this.hunterId = hunter_id;
     }
 
-    public RecompensaEntity getRecompensaId() {
-        return recompensa_id;
+    public Recompensa getRecompensaId() {
+        return recompensaId;
     }
 
-    public void setRecompensaId(RecompensaEntity recompensa_id) {
-        this.recompensa_id = recompensa_id;
+    public void setRecompensaId(Recompensa recompensa_id) {
+        this.recompensaId = recompensa_id;
     }
 
     public Boolean getStatus() {

@@ -1,12 +1,12 @@
 package com.springboot3.sb3hxh.Converter;
 
-import com.springboot3.sb3hxh.Entity.RecompensaEntity;
+import com.springboot3.sb3hxh.Entity.Recompensa;
 import com.springboot3.sb3hxh.Service.RecompensaService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecompensaConverter implements Converter<String, RecompensaEntity> {
+public class RecompensaConverter implements Converter<String, Recompensa> {
 
     private final RecompensaService recompensaService;
 
@@ -15,7 +15,7 @@ public class RecompensaConverter implements Converter<String, RecompensaEntity> 
     }
 
     @Override
-    public RecompensaEntity convert(String source) {
+    public Recompensa convert(String source) {
         if (source.isEmpty()) {
             return null;
         }

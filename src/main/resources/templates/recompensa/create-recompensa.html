@@ -17,12 +17,12 @@
     <form th:action="@{/recompensas/create-recompensa}" th:object="${recompensa}" method="POST">
 
         <label>Descricao:</label>
-        <input type="text" th:field="*{descricao_recompensa}" class="form-control mb-4 w-25" placeholder="Digite a descrição da recompensa"/>
-        <div th:if="${#fields.hasErrors('descricao_recompensa')}" th:errors="*{descricao_recompensa}" class="text-danger"></div>
+        <input type="text" th:field="*{descricaoRecompensa}" class="form-control mb-4 w-25" placeholder="Digite a descrição da recompensa"/>
+        <div th:if="${#fields.hasErrors('descricaoRecompensa')}" th:errors="*{descricaoRecompensa}" class="text-danger"></div>
 
         <label>Valor:</label>
-        <input type="text" th:field="*{valor_recompensa}" class="form-control mb-4 w-25" placeholder="Digite o valor da recompensa"/>
-        <div th:if="${#fields.hasErrors('valor_recompensa')}" th:errors="*{valor_recompensa}" class="text-danger"></div>
+        <input type="text" th:field="*{valorRecompensa}" class="form-control mb-4 w-25" placeholder="Digite o valor da recompensa"/>
+        <div th:if="${#fields.hasErrors('valorRecompensa')}" th:errors="*{valorRecompensa}" class="text-danger"></div>
 
         <button type="submit" class="btn btn-success col-2"><i class="fa fa-plus"></i>&nbsp;Cadastrar</button>
     </form>

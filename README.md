@@ -5,51 +5,42 @@ sb3-hxh
 ├── src  
     └── main  
         ├── java  
-        │   └── com.springboot3.sb3hxh  
+        │   └── com.springboot3.sb3hxh
+        │       ├── Configuration 
+        │       │   ├── IconConfiguration.java    
         │       ├── Controller  
         │       │   ├── HunterController.java  
         │       │   ├── RecompensaController.java  
         │       │   └── RecompensadoController.java  
         │       ├── Converter  
         │       │   ├── HunterConverter.java  
-        │       │   ├── RecompensaConverter.java  
+        │       │   ├── RecompensaConverter.java
         │       │   ├── TipoHunterConverter.java  
-        │       │   ├── TipoNenConverter.java  
-        │       │   └── TipoSanguineoConverter.java  
+        │       │   ├── TipoNenConverter.java
+        │       │   ├── TipoSanguineoConverter.java  
         │       ├── DAO  
         │       │   ├── HunterDAO.java  
         │       │   ├── RecompensaDAO.java  
         │       │   ├── RecompensadoDAO.java  
-        │       │   ├── TipoHunterDAO.java  
-        │       │   ├── TipoNenDAO.java  
-        │       │   └── TipoSanguineoDAO.java  
         │       ├── Entity  
         │       │   ├── HunterEntity.java  
         │       │   ├── RecompensadoEntity.java  
-        │       │   ├── RecompensaEntity.java  
-        │       │   ├── TipoHunterEntity.java  
-        │       │   ├── TipoNenEntity.java  
-        │       │   └── TipoSanguineoEntity.java  
+        │       │   ├── RecompensaEntity.java
+        │       ├── Enum  
+        │       │   ├── TipoHunterEnum.java  
+        │       │   ├── TipoNenEnum.java  
+        │       │   ├── TipoSanguineoEnum.java    
         │       ├── Service  
         │       │   ├── HunterService.java  
         │       │   ├── RecompensadoService.java  
         │       │   ├── RecompensaService.java  
-        │       │   ├── TipoHunterService.java  
-        │       │   ├── TipoNenService.java  
-        │       │   └── TipoSanguineoService.java  
         │       └── Validation  
         │           ├── ConstraintValidation  
         │           │   ├── HunterValidation.java  
-        │           │   ├── RecompensaConstraintValidation.java  
-        │           │   ├── TipoHunterConstraintValidation.java  
-        │           │   ├── TipoNenConstraintValidation.java  
-        │           │   └── TipoSanguineoConstraintValidation.java  
+        │           │   ├── RecompensaConstraintValidation.java   
         │           ├── HunterValidation.java  
         │           ├── RecompensaValidation.java  
         │           ├── RecompensadoValidation.java  
-        │           ├── TipoHunterValidation.java  
-        │           ├── TipoNenValidation.java  
-        │           └── TipoSanguineoValidation.java  
         └── resources  
             ├── templates  
             └── application.properties  
@@ -133,39 +124,18 @@ To create a server to pgAdmin:
 
 Create table to **PostgreSQL** database:
 ```
-CREATE TABLE tipos_hunters (
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(50) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE tipos_nens (
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(15) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE tipos_sanguineos (
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(3) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
 CREATE TABLE hunters (
 	id SERIAL PRIMARY KEY,
 	nome_hunter VARCHAR(50) NOT NULL,
 	idade_hunter INT NOT NULL,
 	altura_hunter DECIMAL(3,2) NOT NULL,
 	peso_hunter DECIMAL(5,2) NOT NULL,
-	tipo_hunter_id INT NOT NULL,
-	tipo_nen_id INT NOT NULL,
-	tipo_sanguineo_id INT NOT NULL,
+	tipo_hunter VARCHAR(50) NOT NULL,
+	tipo_nen VARCHAR(15) NOT NULL,
+	tipo_sanguineo VARCHAR(3) NOT NULL,
 	inicio DATE,
 	termino DATE,
-	deleted_at TIMESTAMP,
-	FOREIGN KEY (tipo_hunter_id) REFERENCES tipos_hunters (id),
-	FOREIGN KEY (tipo_nen_id) REFERENCES tipos_nens (id),
-	FOREIGN KEY (tipo_sanguineo_id) REFERENCES tipos_sanguineos (id)
+	deleted_at TIMESTAMP
 );
 
 CREATE TABLE recompensas (
@@ -188,39 +158,18 @@ CREATE TABLE recompensados (
 
 Create tables to **MySQL** database:
 ```
-CREATE TABLE tipos_hunters (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(50) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE tipos_nens (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(15) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE tipos_sanguineos (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(3) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
 CREATE TABLE hunters (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome_hunter VARCHAR(50) NOT NULL,
 	idade_hunter INT NOT NULL,
 	altura_hunter DECIMAL(3,2) NOT NULL,
 	peso_hunter DECIMAL(5,2) NOT NULL,
-	tipo_hunter_id INT NOT NULL,
-	tipo_nen_id INT NOT NULL,
-	tipo_sanguineo_id INT NOT NULL,
+	tipo_hunter VARCHAR(50) NOT NULL,
+	tipo_nen VARCHAR(15) NOT NULL,
+	tipo_sanguineo VARCHAR(3) NOT NULL,
 	inicio DATE,
 	termino DATE,
-	deleted_at TIMESTAMP,
-	FOREIGN KEY (tipo_hunter_id) REFERENCES tipos_hunters (id),
-	FOREIGN KEY (tipo_nen_id) REFERENCES tipos_nens (id),
-	FOREIGN KEY (tipo_sanguineo_id) REFERENCES tipos_sanguineos (id)
+	deleted_at TIMESTAMP
 );
 
 CREATE TABLE recompensas (
@@ -239,49 +188,4 @@ CREATE TABLE recompensados (
 	FOREIGN KEY (hunter_id) REFERENCES hunters (id),
 	FOREIGN KEY (recompensa_id) REFERENCES recompensas (id)
 );
-```
-
-Insert commands:
-```
-INSERT INTO tipos_hunters (descricao) VALUES
-('Hunter Gourmet'),
-('Hunter Arqueólogo'),
-('Hunter Cientista ou Hunter Técnico'),
-('Hunter Selvagem ou Hunter Ambientalista'),
-('Hunter Musical'),
-('Hunter Treasure'),
-('Hunter Lista Negra'),
-('Hunter Mercenário'),
-('Hunter Medicinal'),
-('Hunter Hacker'),
-('Hunter Cabeça'),
-('Hunter de Informação'),
-('Hunter Jackspot'),
-('Hunter Vírus'),
-('Hunter da Juventudade e Beleza'),
-('Hunter Terrorista'),
-('Hunter de Venenos'),
-('Hunter Caçador'),
-('Hunter Paleógrafo'),
-('Hunter Perdido'),
-('Hunter Provisório'),
-('Hunter Temporário');
-
-INSERT INTO tipos_nens (descricao) VALUES
-('Reforço'),
-('Emissão'),
-('Transformação'),
-('Manipulação'),
-('Materialização'),
-('Especialização');
-
-INSERT INTO tipos_sanguineos (descricao) VALUES
-('A+'),
-('A-'),
-('B+'),
-('B-'),
-('AB+'),
-('AB-'),
-('O+'),
-('O-');
 ```

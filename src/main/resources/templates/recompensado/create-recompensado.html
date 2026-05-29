@@ -19,18 +19,18 @@
     <form th:action="@{/recompensados/create-recompensado}" th:object="${recompensado}" method="POST">
 
         <label>Hunter:</label>
-        <select th:field="*{hunter_id}" class="form-control mb-4 w-25">
+        <select th:field="*{hunterId}" class="form-control mb-4 w-25">
             <option value="">Escolha um Hunter</option>
-            <option th:each="h : ${hunter}" th:value="${h.id}" th:text="${h.nome_hunter}"></option>
+            <option th:each="hunter : ${hunter}" th:value="${hunter.id}" th:text="${hunter.nomeHunter}"></option>
         </select>
-        <div th:if="${#fields.hasErrors('hunter_id')}" th:errors="*{hunter_id}" class="text-danger"></div>
+        <div th:if="${#fields.hasErrors('hunterId')}" th:errors="*{hunterId}" class="text-danger"></div>
 
         <label>Recompensa:</label>
-        <select th:field="*{recompensa_id}" class="form-control mb-4 w-25">
+        <select th:field="*{recompensaId}" class="form-control mb-4 w-25">
             <option value="">Escolha uma recompensa</option>
-            <option th:each="r : ${recompensa}" th:value="${r.id}" th:text="${r.descricao_recompensa}"></option>
+            <option th:each="recompensa : ${recompensa}" th:value="${recompensa.id}" th:text="${recompensa.descricaoRecompensa}"></option>
         </select>
-        <div th:if="${#fields.hasErrors('recompensa_id')}" th:errors="*{recompensa_id}" class="text-danger"></div>
+        <div th:if="${#fields.hasErrors('recompensaId')}" th:errors="*{recompensaId}" class="text-danger"></div>
 
         <label>Status:</label>
         <input class="form-check-input" type="checkbox" th:field="*{status}" />

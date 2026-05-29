@@ -18,41 +18,41 @@
         <input type="hidden" th:field="*{id}">
 
         <label>Nome:</label>
-        <input type="text" th:field="*{nome_hunter}" class="form-control mb-4 w-25"/>
-        <div th:if="${#fields.hasErrors('nome_hunter')}" th:errors="*{nome_hunter}" class="text-danger"></div>
+        <input type="text" th:field="*{nomeHunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('nomeHunter')}" th:errors="*{nomeHunter}" class="text-danger"></div>
 
         <label>Idade:</label>
-        <input type="text" th:field="*{idade_hunter}" class="form-control mb-4 w-25"/>
-        <div th:if="${#fields.hasErrors('idade_hunter')}" th:errors="*{idade_hunter}" class="text-danger"></div>
+        <input type="text" th:field="*{idadeHunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('idadeHunter')}" th:errors="*{idadeHunter}" class="text-danger"></div>
 
         <label>Altura:</label>
-        <input type="text" th:field="*{altura_hunter}" class="form-control mb-4 w-25"/>
-        <div th:if="${#fields.hasErrors('altura_hunter')}" th:errors="*{altura_hunter}" class="text-danger"></div>
+        <input type="text" th:field="*{alturaHunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('alturaHunter')}" th:errors="*{alturaHunter}" class="text-danger"></div>
 
         <label>Peso:</label>
-        <input type="text" th:field="*{peso_hunter}" class="form-control mb-4 w-25"/>
-        <div th:if="${#fields.hasErrors('peso_hunter')}" th:errors="*{peso_hunter}" class="text-danger"></div>
+        <input type="text" th:field="*{pesoHunter}" class="form-control mb-4 w-25"/>
+        <div th:if="${#fields.hasErrors('pesoHunter')}" th:errors="*{pesoHunter}" class="text-danger"></div>
 
         <label>Tipo de Hunter:</label>
-        <select th:field="*{tipo_hunter_id}" class="form-control mb-4 w-25">
+        <select th:field="*{tipoHunter}" class="form-control mb-4 w-25">
             <option value="">Escolha um tipo de Hunter</option>
-            <option th:each="th : ${tipo_hunter}" th:value="${th.id}" th:text="${th.descricao}"></option>
+            <option th:each="tipo_hunter : ${tipo_hunter}" th:value="${tipo_hunter.name()}" th:text="${tipo_hunter.descricao}"></option>
         </select>
-        <div th:if="${#fields.hasErrors('tipo_hunter_id')}" th:errors="*{tipo_hunter_id}" class="text-danger"></div>
+        <div th:if="${#fields.hasErrors('tipoHunter')}" th:errors="*{tipoHunter}" class="text-danger"></div>
 
         <label>Tipo de Nen:</label>
-        <select th:field="*{tipo_nen_id}" class="form-control mb-4 w-25">
+        <select th:field="*{tipoNen}" class="form-control mb-4 w-25">
             <option value="">Escolha um tipo de Nen</option>
-            <option th:each="tn : ${tipo_nen}" th:value="${tn.id}" th:text="${tn.descricao}"></option>
+            <option th:each="tipo_nen : ${tipo_nen}" th:value="${tipo_nen.name()}" th:text="${tipo_nen.descricao}"></option>
         </select>
-        <div th:if="${#fields.hasErrors('tipo_nen_id')}" th:errors="*{tipo_nen_id}" class="text-danger"></div>
+        <div th:if="${#fields.hasErrors('tipoNen')}" th:errors="*{tipoNen}" class="text-danger"></div>
 
         <label>Tipo sanguíneo:</label>
-        <select th:field="*{tipo_sanguineo_id}" class="form-control mb-4 w-25">
+        <select th:field="*{tipoSanguineo}" class="form-control mb-4 w-25">
             <option value="">Escolha um tipo sanguíneo</option>
-            <option th:each="ts : ${tipo_sanguineo}" th:value="${ts.id}" th:text="${ts.descricao}"></option>
+            <option th:each="tipo_sanguineo : ${tipo_sanguineo}" th:value="${tipo_sanguineo.name()}" th:text="${tipo_sanguineo.descricao}"></option>
         </select>
-        <div th:if="${#fields.hasErrors('tipo_sanguineo_id')}" th:errors="*{tipo_sanguineo_id}" class="text-danger"></div>
+        <div th:if="${#fields.hasErrors('tipoSanguineo')}" th:errors="*{tipoSanguineo}" class="text-danger"></div>
 
         <label>Data de início:</label>
         <input type="date" th:field="*{inicio}" class="form-control mb-4 w-25"/>

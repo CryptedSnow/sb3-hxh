@@ -13,7 +13,7 @@ import java.util.Locale;
 
 @Entity
 @Table(name="recompensas")
-public class RecompensaEntity {
+public class Recompensa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,25 +22,25 @@ public class RecompensaEntity {
 
     @NotBlank(message = "A descrição da recompensa é requerida")
     @Column(name="descricao_recompensa")
-    private String descricao_recompensa;
+    private String descricaoRecompensa;
 
     @NotNull(message = "O valor da recompensa é requerida")
     @DecimalMin(value = "0.00", message = "O valor deve ser no mínimo R$ 0,00")
     @DecimalMax(value = "1000000.00", message = "O valor deve ser no máximo R$ 1.000.000,00")
     @Column(name="valor_recompensa")
-    private Float valor_recompensa;
+    private Float valorRecompensa;
 
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
 
-    public RecompensaEntity() {
+    public Recompensa() {
 
     }
 
-    public RecompensaEntity(int id, String descricao_recompensa, Float valor_recompensa, LocalDateTime deleted_at) {
+    public Recompensa(int id, String descricao_recompensa, Float valor_recompensa, LocalDateTime deleted_at) {
         this.id = id;
-        this.descricao_recompensa = descricao_recompensa;
-        this.valor_recompensa = valor_recompensa;
+        this.descricaoRecompensa = descricao_recompensa;
+        this.valorRecompensa = valor_recompensa;
         this.deleted_at = deleted_at;
     }
 
@@ -53,19 +53,19 @@ public class RecompensaEntity {
     }
 
     public String getDescricaoRecompensa() {
-        return descricao_recompensa;
+        return descricaoRecompensa;
     }
 
     public void setDescricaoRecompensa(String descricao_recompensa) {
-        this.descricao_recompensa = descricao_recompensa;
+        this.descricaoRecompensa = descricao_recompensa;
     }
 
     public Float getValorRecompensa() {
-        return valor_recompensa;
+        return valorRecompensa;
     }
 
     public void setValorRecompensa(Float valor_recompensa) {
-        this.valor_recompensa = valor_recompensa;
+        this.valorRecompensa = valor_recompensa;
     }
 
     public LocalDateTime getDeletedAt() {
@@ -78,7 +78,7 @@ public class RecompensaEntity {
 
     public String valorRecompensaFormatado() {
         NumberFormat format = DecimalFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        return format.format(this.valor_recompensa);
+        return format.format(this.valorRecompensa);
     }
 
 }

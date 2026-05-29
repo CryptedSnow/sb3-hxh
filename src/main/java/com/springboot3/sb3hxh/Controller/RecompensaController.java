@@ -1,6 +1,6 @@
 package com.springboot3.sb3hxh.Controller;
 
-import com.springboot3.sb3hxh.Entity.RecompensaEntity;
+import com.springboot3.sb3hxh.Entity.Recompensa;
 import com.springboot3.sb3hxh.Service.RecompensaService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class RecompensaController {
 
     @GetMapping("/list-recompensas")
     public String listRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<RecompensaEntity> recompensaPage = recompensaService.indexPagination(page, size);
+        Page<Recompensa> recompensaPage = recompensaService.indexPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
         model.addAttribute("totalPages", recompensaPage.getTotalPages());
@@ -34,7 +34,7 @@ public class RecompensaController {
 
     @GetMapping("/search-recompensa")
     public String searchRecompensa(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<RecompensaEntity> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensa(search, page, size) : recompensaService.indexPagination(page, size);
+        Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensa(search, page, size) : recompensaService.indexPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
         model.addAttribute("totalPages", recompensaPage.getTotalPages());
@@ -45,13 +45,13 @@ public class RecompensaController {
 
     @GetMapping("/form-create-recompensa")
     public String formCreateRecompensa(Model model){
-        RecompensaEntity recompensaEntity = new RecompensaEntity();
+        Recompensa recompensaEntity = new Recompensa();
         model.addAttribute("recompensa", recompensaEntity);
         return "/recompensa/create-recompensa";
     }
 
     @PostMapping("/create-recompensa")
-    public String createRecompensa(@ModelAttribute("recompensa") @Valid RecompensaEntity recompensaEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String createRecompensa(@ModelAttribute("recompensa") @Valid Recompensa recompensaEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         System.out.println(recompensaEntity);
         if (bindingResult.hasErrors()) {
             log.warn("Erros de validações encontrados no formulário: {}", bindingResult.getAllErrors());
@@ -67,7 +67,7 @@ public class RecompensaController {
 
     @GetMapping("/form-update-recompensa/{id}")
     public String formUpdateRecompensa(@PathVariable("id") int id, Model model) {
-        RecompensaEntity recompensaEntity = recompensaService.read(id);
+        Recompensa recompensaEntity = recompensaService.read(id);
         if (recompensaEntity != null) {
             model.addAttribute("recompensa", recompensaEntity);
             return "/recompensa/update-recompensa";
@@ -77,7 +77,7 @@ public class RecompensaController {
     }
 
     @PostMapping("/update-recompensa/{id}")
-    public String updateRecompensa(@PathVariable("id") int id, @ModelAttribute("recompensa") @Valid RecompensaEntity recompensaEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String updateRecompensa(@PathVariable("id") int id, @ModelAttribute("recompensa") @Valid Recompensa recompensaEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             log.warn("Erros de validações encontrados no formulário: {}", bindingResult.getAllErrors());
             return "/recompensa/update-recompensa";
@@ -93,7 +93,7 @@ public class RecompensaController {
 
     @GetMapping("/trash-recompensa/{id}")
     public String trashRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        RecompensaEntity recompensaEntity = recompensaService.read(id);
+        Recompensa recompensaEntity = recompensaService.read(id);
         String descricao = recompensaEntity.getDescricaoRecompensa();
         recompensaService.trash(id);
         log.info("Recompensa {} foi enviada para a lixeira.", descricao);
@@ -103,7 +103,7 @@ public class RecompensaController {
 
     @GetMapping("/trash-list-recompensa")
     public String listTrashRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<RecompensaEntity> recompensaPage = recompensaService.indexTrash(page, size);
+        Page<Recompensa> recompensaPage = recompensaService.indexTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
         model.addAttribute("totalPages", recompensaPage.getTotalPages());
@@ -112,7 +112,7 @@ public class RecompensaController {
 
     @GetMapping("/search-recompensa-trash")
     public String filtrarRecompensaTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<RecompensaEntity> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensaTrash(search, page, size) : recompensaService.indexTrash(page, size);
+        Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensaTrash(search, page, size) : recompensaService.indexTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
         model.addAttribute("totalPages", recompensaPage.getTotalPages());
@@ -123,7 +123,7 @@ public class RecompensaController {
 
     @GetMapping("/restore-recompensa/{id}")
     public String restoreRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        RecompensaEntity recompensaEntity = recompensaService.read(id);
+        Recompensa recompensaEntity = recompensaService.read(id);
         String descricao = recompensaEntity.getDescricaoRecompensa();
         recompensaService.restore(id);
         log.info("Recompensa {} foi restaurada para a listagem principal.", descricao);
