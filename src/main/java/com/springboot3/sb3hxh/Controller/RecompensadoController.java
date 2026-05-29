@@ -63,7 +63,7 @@ public class RecompensadoController {
         for (RecompensaEntity recompensa : recompensaEntity) {
             boolean jaAssociado = false;
             for (RecompensadoEntity recompensado : recompensadoService.index()) {
-                if (recompensado.getRecompensa_id().equals(recompensa)) {
+                if (recompensado.getRecompensaId().equals(recompensa)) {
                     jaAssociado = true;
                     break;
                 }
@@ -86,7 +86,7 @@ public class RecompensadoController {
         for (RecompensaEntity recompensa : recompensaEntity) {
             boolean jaAssociado = false;
             for (RecompensadoEntity recompensado : recompensadoService.index()) {
-                if (recompensado.getRecompensa_id().equals(recompensa)) {
+                if (recompensado.getRecompensaId().equals(recompensa)) {
                     jaAssociado = true;
                     break;
                 }
@@ -117,7 +117,7 @@ public class RecompensadoController {
         for (RecompensaEntity recompensa : recompensaEntity) {
             boolean jaAssociado = false;
             for (RecompensadoEntity recompensado : recompensadoService.index()) {
-                if (recompensado.getRecompensa_id().equals(recompensa)) {
+                if (recompensado.getRecompensaId().equals(recompensa)) {
                     jaAssociado = true;
                     break;
                 }
@@ -140,7 +140,7 @@ public class RecompensadoController {
         for (RecompensaEntity recompensa : recompensaEntity) {
             boolean jaAssociado = false;
             for (RecompensadoEntity recompensado : recompensadoService.index()) {
-                if (recompensado.getRecompensa_id().equals(recompensa)) {
+                if (recompensado.getRecompensaId().equals(recompensa)) {
                     jaAssociado = true;
                     break;
                 }
@@ -199,15 +199,6 @@ public class RecompensadoController {
         recompensadoService.restore(id);
         log.info("Recompensado(a) {} foi restaurado(a) para a listagem principal.", recompensado);
         redirectAttributes.addFlashAttribute("success_store", "Recompensado " + recompensado + " foi restaurado para a listagem principal.");
-        return "redirect:/recompensados/trash-list-recompensado?page=0&size=5";
-    }
-
-    @GetMapping("/delete-recompensado/{id}")
-    public String deleteRecompensado(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        String recompensado = recompensadoService.showRecompensadoTrash(id);
-        recompensadoService.delete(id);
-        log.info("Recompensado(a) ID Nº{} foi excluído(a) permanentemente.", recompensado);
-        redirectAttributes.addFlashAttribute("success_delete", "Recompensado " + recompensado + " foi excluído do sistema.");
         return "redirect:/recompensados/trash-list-recompensado?page=0&size=5";
     }
 

@@ -15,7 +15,6 @@ public interface HunterDAO {
     void trash(int id);
     Page<HunterEntity> indexTrash(int page, int size);
     HunterEntity restore(int id);
-    void delete(int id);
     Page<HunterEntity> searchHunter(String search, int page, int size);
     Page<HunterEntity> searchHunterTrash(String search, int page, int size);
     boolean existsId(String id);

@@ -52,27 +52,27 @@ public class RecompensaEntity {
         this.id = id;
     }
 
-    public String getDescricao_recompensa() {
+    public String getDescricaoRecompensa() {
         return descricao_recompensa;
     }
 
-    public void setDescricao_recompensa(String descricao_recompensa) {
+    public void setDescricaoRecompensa(String descricao_recompensa) {
         this.descricao_recompensa = descricao_recompensa;
     }
 
-    public Float getValor_recompensa() {
+    public Float getValorRecompensa() {
         return valor_recompensa;
     }
 
-    public void setValor_recompensa(Float valor_recompensa) {
+    public void setValorRecompensa(Float valor_recompensa) {
         this.valor_recompensa = valor_recompensa;
     }
 
-    public LocalDateTime getDeleted_at() {
+    public LocalDateTime getDeletedAt() {
         return deleted_at;
     }
 
-    public void setDeleted_at(LocalDateTime deleted_at) {
+    public void setDeletedAt(LocalDateTime deleted_at) {
         this.deleted_at = deleted_at;
     }
 

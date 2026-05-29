@@ -44,7 +44,7 @@
         </thead>
         <tbody>
             <tr th:each="recompensa : ${recompensas}">
-                <td th:text="${recompensa.descricao_recompensa}"></td>
+                <td th:text="${recompensa.descricaoRecompensa}"></td>
                 <td th:text="${recompensa.valorRecompensaFormatado}"></td>
                 <td>
                     <a th:href="@{'/recompensas/form-update-recompensa/' + ${recompensa.id}}" class="btn btn-primary btn-sm"><i class="fa fa-arrows-rotate"></i>&nbsp;Atualizar</a>

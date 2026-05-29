@@ -51,13 +51,13 @@
         </thead>
         <tbody>
             <tr th:each="hunter : ${hunters}">
-                <td th:text="${hunter.nome_hunter}"></td>
-                <td th:text="${hunter.idade_hunter}"></td>
+                <td th:text="${hunter.nomeHunter}"></td>
+                <td th:text="${hunter.idadeHunter}"></td>
                 <td th:text="${hunter.alturaFormatada}"></td>
                 <td th:text="${hunter.pesoFormatado}"></td>
-                <td th:text="${hunter.tipo_hunter_id.descricao}"></td>
-                <td th:text="${hunter.tipo_nen_id.descricao}"></td>
-                <td th:text="${hunter.tipo_sanguineo_id.descricao}"></td>
+                <td th:text="${hunter.tipoHunterId.descricao}"></td>
+                <td th:text="${hunter.tipoNenId.descricao}"></td>
+                <td th:text="${hunter.tipoSanguineoId.descricao}"></td>
                 <td th:text="${hunter.inicioFormatado}"></td>
                 <td th:text="${hunter.terminoFormatado}"></td>
                 <td>

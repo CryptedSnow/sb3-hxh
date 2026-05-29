@@ -50,19 +50,19 @@ public class RecompensadoEntity {
         this.id = id;
     }
 
-    public HunterEntity getHunter_id() {
+    public HunterEntity getHunterId() {
         return hunter_id;
     }
 
-    public void setHunter_id(HunterEntity hunter_id) {
+    public void setHunterId(HunterEntity hunter_id) {
         this.hunter_id = hunter_id;
     }
 
-    public RecompensaEntity getRecompensa_id() {
+    public RecompensaEntity getRecompensaId() {
         return recompensa_id;
     }
 
-    public void setRecompensa_id(RecompensaEntity recompensa_id) {
+    public void setRecompensaId(RecompensaEntity recompensa_id) {
         this.recompensa_id = recompensa_id;
     }
 
@@ -74,11 +74,11 @@ public class RecompensadoEntity {
         this.status = status;
     }
 
-    public LocalDateTime getDeleted_at() {
+    public LocalDateTime getDeletedAt() {
         return deleted_at;
     }
 
-    public void setDeleted_at(LocalDateTime deleted_at) {
+    public void setDeletedAt(LocalDateTime deleted_at) {
         this.deleted_at = deleted_at;
     }
 

@@ -83,7 +83,7 @@ public class HunterController {
             return "/hunter/create-hunter";
         } else {
             hunterService.create(hunterEntity);
-            String nome = hunterEntity.getNome_hunter();
+            String nome = hunterEntity.getNomeHunter();
             log.info("Hunter {} está presente no sistema.", nome);
             redirectAttributes.addFlashAttribute("success_store", "Hunter " + nome + " está presente no sistema.");
             return "redirect:/hunters/list-hunters?page=0&size=5";
@@ -117,7 +117,7 @@ public class HunterController {
         } else {
             hunterEntity.setId(id);
             hunterService.update(hunterEntity);
-            String nome = hunterEntity.getNome_hunter();
+            String nome = hunterEntity.getNomeHunter();
             log.info("Hunter {} obteve atualizações em suas informações.", nome);
             redirectAttributes.addFlashAttribute("success_update", "Hunter " + nome + " foi atualizado no sistema.");
             return "redirect:/hunters/list-hunters?page=0&size=5";
@@ -127,7 +127,7 @@ public class HunterController {
     @GetMapping("/trash-hunter/{id}")
     public String trashHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         HunterEntity hunterEntity = hunterService.read(id);
-        String nome = hunterEntity.getNome_hunter();
+        String nome = hunterEntity.getNomeHunter();
         hunterService.trash(id);
         log.info("Hunter {} foi enviado(a) para a lixeira.", nome);
         redirectAttributes.addFlashAttribute("success_delete", "Hunter " + nome + " está na lixeira.");
@@ -157,20 +157,10 @@ public class HunterController {
     @GetMapping("/restore-hunter/{id}")
     public String restoreHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         HunterEntity hunterEntity = hunterService.read(id);
-        String nome = hunterEntity.getNome_hunter();
+        String nome = hunterEntity.getNomeHunter();
         hunterService.restore(id);
         log.info("Hunter {} foi restaurado(a) para a listagem principal.", nome);
         redirectAttributes.addFlashAttribute("success_store", "Hunter " + nome + " foi restaurado para a listagem principal.");
-        return "redirect:/hunters/trash-list-hunter?page=0&size=5";
-    }
-
-    @GetMapping("/delete-hunter/{id}")
-    public String deleteHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        HunterEntity hunterEntity = hunterService.read(id);
-        String nome = hunterEntity.getNome_hunter();
-        hunterService.delete(id);
-        log.info("Hunter {} foi excluído(a) permanentemente.", nome);
-        redirectAttributes.addFlashAttribute("success_delete", "Hunter " + nome + " foi excluído do sistema.");
         return "redirect:/hunters/trash-list-hunter?page=0&size=5";
     }
 

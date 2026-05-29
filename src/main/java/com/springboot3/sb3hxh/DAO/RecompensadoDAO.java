@@ -17,7 +17,6 @@ public interface RecompensadoDAO {
     void trash(int id);
     Page<RecompensadoEntity> indexTrash(int page, int size);
     RecompensadoEntity restore(int id);
-    void delete(int id);
     Page<RecompensadoEntity> searchRecompensado(String search, int page, int size);
     Page<RecompensadoEntity> searchRecompensadoTrash(String search, int page, int size);
 

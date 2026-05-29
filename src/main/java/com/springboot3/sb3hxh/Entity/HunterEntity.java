@@ -92,59 +92,59 @@ public class HunterEntity {
         this.id = id;
     }
 
-    public String getNome_hunter() {
+    public String getNomeHunter() {
         return nome_hunter;
     }
 
-    public void setNome_hunter(String nome_hunter) {
+    public void setNomeHunter(String nome_hunter) {
         this.nome_hunter = nome_hunter;
     }
 
-    public Integer getIdade_hunter() {
+    public Integer getIdadeHunter() {
         return idade_hunter;
     }
 
-    public void setIdade_hunter(Integer idade_hunter) {
+    public void setIdadeHunter(Integer idade_hunter) {
         this.idade_hunter = idade_hunter;
     }
 
-    public Float getAltura_hunter() {
+    public Float getAlturaHunter() {
         return altura_hunter;
     }
 
-    public void setAltura_hunter(Float altura_hunter) {
+    public void setAlturaHunter(Float altura_hunter) {
         this.altura_hunter = altura_hunter;
     }
 
-    public Float getPeso_hunter() {
+    public Float getPesoHunter() {
         return peso_hunter;
     }
 
-    public void setPeso_hunter(Float peso_hunter) {
+    public void setPesoHunter(Float peso_hunter) {
         this.peso_hunter = peso_hunter;
     }
 
-    public TipoHunterEntity getTipo_hunter_id() {
+    public TipoHunterEntity getTipoHunterId() {
         return tipo_hunter_id;
     }
 
-    public void setTipo_hunter_id(TipoHunterEntity tipo_hunter_id) {
+    public void setTipoHunterId(TipoHunterEntity tipo_hunter_id) {
         this.tipo_hunter_id = tipo_hunter_id;
     }
 
-    public TipoNenEntity getTipo_nen_id() {
+    public TipoNenEntity getTipoNenId() {
         return tipo_nen_id;
     }
 
-    public void setTipo_nen_id(TipoNenEntity tipo_nen_id) {
+    public void setTipoNenId(TipoNenEntity tipo_nen_id) {
         this.tipo_nen_id = tipo_nen_id;
     }
 
-    public TipoSanguineoEntity getTipo_sanguineo_id() {
+    public TipoSanguineoEntity getTipoSanguineoId() {
         return tipo_sanguineo_id;
     }
 
-    public void setTipo_sanguineo_id(TipoSanguineoEntity tipo_sanguineo_id) {
+    public void setTipoSanguineoId(TipoSanguineoEntity tipo_sanguineo_id) {
         this.tipo_sanguineo_id = tipo_sanguineo_id;
     }
 
@@ -164,11 +164,11 @@ public class HunterEntity {
         this.termino = termino;
     }
 
-    public LocalDateTime getDeleted_at() {
+    public LocalDateTime getDeletedAt() {
         return deleted_at;
     }
 
-    public void setDeleted_at(LocalDateTime deleted_at) {
+    public void setDeletedAt(LocalDateTime deleted_at) {
         this.deleted_at = deleted_at;
     }
 

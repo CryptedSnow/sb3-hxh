@@ -58,7 +58,7 @@ public class RecompensaController {
             return "/recompensa/create-recompensa";
         } else {
             recompensaService.create(recompensaEntity);
-            String descricao = recompensaEntity.getDescricao_recompensa();
+            String descricao = recompensaEntity.getDescricaoRecompensa();
             log.info("Recompensa {} está presente no sistema", descricao);
             redirectAttributes.addFlashAttribute("success_store", "Recompensa " + descricao + " está presente no sistema.");
             return "redirect:/recompensas/list-recompensas?page=0&size=5";
@@ -84,7 +84,7 @@ public class RecompensaController {
         } else {
             recompensaEntity.setId(id);
             recompensaService.update(recompensaEntity);
-            String descricao = recompensaEntity.getDescricao_recompensa();
+            String descricao = recompensaEntity.getDescricaoRecompensa();
             log.info("Recompensa {} obteve atualizações em suas informações.", descricao);
             redirectAttributes.addFlashAttribute("success_update", "Recompensa " + descricao + " foi atualizada no sistema.");
             return "redirect:/recompensas/list-recompensas?page=0&size=5";
@@ -94,7 +94,7 @@ public class RecompensaController {
     @GetMapping("/trash-recompensa/{id}")
     public String trashRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         RecompensaEntity recompensaEntity = recompensaService.read(id);
-        String descricao = recompensaEntity.getDescricao_recompensa();
+        String descricao = recompensaEntity.getDescricaoRecompensa();
         recompensaService.trash(id);
         log.info("Recompensa {} foi enviada para a lixeira.", descricao);
         redirectAttributes.addFlashAttribute("success_delete", "Recompensa " + descricao + " está na lixeira.");
@@ -124,20 +124,10 @@ public class RecompensaController {
     @GetMapping("/restore-recompensa/{id}")
     public String restoreRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         RecompensaEntity recompensaEntity = recompensaService.read(id);
-        String descricao = recompensaEntity.getDescricao_recompensa();
+        String descricao = recompensaEntity.getDescricaoRecompensa();
         recompensaService.restore(id);
         log.info("Recompensa {} foi restaurada para a listagem principal.", descricao);
         redirectAttributes.addFlashAttribute("success_store", "Recompensa " + descricao + " foi restaurada para a listagem principal.");
-        return "redirect:/recompensas/trash-list-recompensa?page=0&size=5";
-    }
-
-    @GetMapping("/delete-recompensa/{id}")
-    public String deleteRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        RecompensaEntity recompensaEntity = recompensaService.read(id);
-        String descricao = recompensaEntity.getDescricao_recompensa();
-        recompensaService.delete(id);
-        log.info("Recompensa {} foi excluída permanentemente.", descricao);
-        redirectAttributes.addFlashAttribute("success_delete", "Recompensa " + descricao + " foi excluída do sistema.");
         return "redirect:/recompensas/trash-list-recompensa?page=0&size=5";
     }
 

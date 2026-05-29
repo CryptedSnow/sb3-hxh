@@ -79,7 +79,7 @@ public class RecompensaService implements RecompensaDAO {
     public void trash(int id) {
         RecompensaEntity recompensaEntity = entityManager.find(RecompensaEntity.class, id);
         if (recompensaEntity != null) {
-            recompensaEntity.setDeleted_at(LocalDateTime.now());
+            recompensaEntity.setDeletedAt(LocalDateTime.now());
             entityManager.merge(recompensaEntity);
         }
     }
@@ -114,19 +114,12 @@ public class RecompensaService implements RecompensaDAO {
     public RecompensaEntity restore(int id) {
         RecompensaEntity recompensaEntity = entityManager.find(RecompensaEntity.class, id);
         if (recompensaEntity != null) {
-            recompensaEntity.setDeleted_at(null);
+            recompensaEntity.setDeletedAt(null);
             entityManager.persist(recompensaEntity);
         } else {
             throw new IllegalArgumentException("Registro não encontrado com o ID fornecido: " + id);
         }
         return recompensaEntity;
-    }
-
-    @Override
-    @Transactional
-    public void delete(int id) {
-        RecompensaEntity recompensaEntity = entityManager.find(RecompensaEntity.class,id);
-        entityManager.remove(recompensaEntity);
     }
 
     @Override
