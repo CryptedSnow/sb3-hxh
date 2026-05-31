@@ -7,7 +7,7 @@ sb3-hxh
         ├── java  
         │   └── com.springboot3.sb3hxh
         │       ├── Configuration 
-        │       │   ├── IconConfiguration.java    
+        │       │   └── IconConfiguration.java    
         │       ├── Controller  
         │       │   ├── HunterController.java  
         │       │   ├── RecompensaController.java  
@@ -17,31 +17,25 @@ sb3-hxh
         │       │   ├── RecompensaConverter.java
         │       │   ├── TipoHunterConverter.java  
         │       │   ├── TipoNenConverter.java
-        │       │   ├── TipoSanguineoConverter.java  
+        │       │   └── TipoSanguineoConverter.java  
         │       ├── DAO  
         │       │   ├── HunterDAO.java  
         │       │   ├── RecompensaDAO.java  
-        │       │   ├── RecompensadoDAO.java  
+        │       │   └── RecompensadoDAO.java  
         │       ├── Entity  
         │       │   ├── HunterEntity.java  
         │       │   ├── RecompensadoEntity.java  
-        │       │   ├── RecompensaEntity.java
+        │       │   └── RecompensaEntity.java
         │       ├── Enum  
         │       │   ├── TipoHunterEnum.java  
         │       │   ├── TipoNenEnum.java  
-        │       │   ├── TipoSanguineoEnum.java    
-        │       ├── Service  
-        │       │   ├── HunterService.java  
-        │       │   ├── RecompensadoService.java  
-        │       │   ├── RecompensaService.java  
-        │       └── Validation  
-        │           ├── ConstraintValidation  
-        │           │   ├── HunterValidation.java  
-        │           │   ├── RecompensaConstraintValidation.java   
-        │           ├── HunterValidation.java  
-        │           ├── RecompensaValidation.java  
-        │           ├── RecompensadoValidation.java  
-        └── resources  
+        │       │   └── TipoSanguineoEnum.java    
+        │       └── Service  
+        │           ├── HunterService.java  
+        │           ├── RecompensadoService.java  
+        │           └── RecompensaService.java            
+        └── resources 
+            ├── static  
             ├── templates  
             └── application.properties  
 ```
@@ -54,6 +48,7 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 
 1 - Presentation tier:
 * ```templates``` folder: Interface files from application (Because redirecting of ```Controller``` class).
+* ```static```: CSS e JS files to implements Interface files.
 
 2 - Application tier:
 * ```Controller``` folder: HTTP requests (extends ```Entity, Service``` class).
@@ -66,10 +61,13 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 4 - Foreign key converter
 * ```Converter``` folder: Use to define correctly foreign key value.
 
-5 - Exist validation
-* ```Validation``` folder: Create a validation to check existence of foreign keys.
+5 - Enum options
+* ```Enum``` folder: Work with predefined sets of values.
 
-6 - Others files:
+6 - Icon
+* ```Configuration``` folder: Default icon to browser window.
+
+7 - Others files:
 * ```application.properties```: Application settings file.
 
 ## Database
