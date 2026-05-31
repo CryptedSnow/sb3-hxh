@@ -179,27 +179,27 @@ public class Hunter {
     }
 
     public String alturaFormatada() {
-        DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(this.alturaHunter) + " m";
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return decimalFormat.format(this.alturaHunter) + " m";
     }
 
     public String pesoFormatado() {
-        DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(this.pesoHunter) + " kg";
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return decimalFormat.format(this.pesoHunter) + " kg";
     }
 
     public String inicioFormatado() {
         if (this.inicio != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            return sdf.format(this.inicio);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return simpleDateFormat.format(this.inicio);
         }
         return "";
     }
 
     public String terminoFormatado() {
         if (this.termino != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            return sdf.format(this.termino);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return simpleDateFormat.format(this.termino);
         }
         return "";
     }

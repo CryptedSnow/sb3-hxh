@@ -77,8 +77,8 @@ public class Recompensa {
     }
 
     public String valorRecompensaFormatado() {
-        NumberFormat format = DecimalFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        return format.format(this.valorRecompensa);
+        NumberFormat numberFormatrformat = DecimalFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return numberFormatrformat.format(this.valorRecompensa);
     }
 
 }
