@@ -62,7 +62,7 @@
                 <td th:text="${hunter.terminoFormatado}"></td>
                 <td>
                     <a th:href="@{'/hunters/form-update-hunter/' + ${hunter.id}}" class="btn btn-primary btn-sm"><i class="fa fa-arrows-rotate"></i>&nbsp;Atualizar</a>
-                    <a th:href="@{'/hunters/trash-hunter/' + ${hunter.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Lixeira</a>
+                    <a th:href="@{'/hunters/deletar-hunter/' + ${hunter.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Lixeira</a>
                 </td>
             </tr>
         </tbody>

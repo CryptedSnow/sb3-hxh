@@ -70,7 +70,7 @@ public class Hunter {
     private Date termino;
 
     @Column(name = "deleted_at")
-    private LocalDateTime deleted_at;
+    private LocalDateTime deletedAt;
 
     public Hunter() {
 
@@ -87,7 +87,7 @@ public class Hunter {
         this.tipoSanguineo = tipo_sanguineo;
         this.inicio = inicio;
         this.termino = termino;
-        this.deleted_at = deleted_at;
+        this.deletedAt = deleted_at;
     }
 
     public int getId() {
@@ -171,11 +171,11 @@ public class Hunter {
     }
 
     public LocalDateTime getDeletedAt() {
-        return deleted_at;
+        return deletedAt;
     }
 
     public void setDeletedAt(LocalDateTime deleted_at) {
-        this.deleted_at = deleted_at;
+        this.deletedAt = deleted_at;
     }
 
     public String alturaFormatada() {

@@ -20,7 +20,7 @@ public class RecompensaConverter implements Converter<String, Recompensa> {
             return null;
         }
         int id = Integer.parseInt(source);
-        return recompensaService.read(id);
+        return recompensaService.findRecompensaId(id);
     }
 
 }

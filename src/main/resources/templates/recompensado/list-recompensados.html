@@ -51,7 +51,7 @@
                 <td th:text="${recompensado.recompensaId.valorRecompensaFormatado}"></td>
                 <td th:text="${recompensado.verificarStatus}"></td>
                 <td>
-                    <a th:href="@{'/recompensados/trash-recompensado/' + ${recompensado.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Lixeira</a>
+                    <a th:href="@{'/recompensados/delete-recompensado/' + ${recompensado.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Lixeira</a>
                 </td>
             </tr>
         </tbody>

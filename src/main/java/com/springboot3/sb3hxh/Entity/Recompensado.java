@@ -29,7 +29,7 @@ public class Recompensado {
     private Boolean status;
 
     @Column(name = "deleted_at")
-    private LocalDateTime deleted_at;
+    private LocalDateTime deletedAt;
 
     public Recompensado() {
 
@@ -75,11 +75,11 @@ public class Recompensado {
     }
 
     public LocalDateTime getDeletedAt() {
-        return deleted_at;
+        return deletedAt;
     }
 
     public void setDeletedAt(LocalDateTime deleted_at) {
-        this.deleted_at = deleted_at;
+        this.deletedAt = deleted_at;
     }
 
     public String verificarStatus() {
