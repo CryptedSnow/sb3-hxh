@@ -32,7 +32,7 @@ public class RecompensaController {
         return "/recompensa/list-recompensas";
     }
 
-    @GetMapping("/search-recompensa")
+    @GetMapping("/search-recompensas")
     public String searchRecompensa(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.buscarRecompensa(search, page, size) : recompensaService.indexRecompensasPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
@@ -101,7 +101,7 @@ public class RecompensaController {
         return "redirect:/recompensas/list-recompensas?page=0&size=5";
     }
 
-    @GetMapping("/trash-list-recompensa")
+    @GetMapping("/trash-list-recompensas")
     public String listTrashRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensa> recompensaPage = recompensaService.indexRecompensasTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
@@ -110,7 +110,7 @@ public class RecompensaController {
         return "/recompensa/trash-recompensa";
     }
 
-    @GetMapping("/search-recompensa-trash")
+    @GetMapping("/search-recompensas-trash")
     public String filtrarRecompensaTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.buscarRecompensaTrash(search, page, size) : recompensaService.indexRecompensasTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
@@ -128,7 +128,7 @@ public class RecompensaController {
         recompensaService.restoreRecompensa(id);
         log.info("Recompensa {} foi restaurada para a listagem principal.", descricao);
         redirectAttributes.addFlashAttribute("success_store", "Recompensa " + descricao + " foi restaurada para a listagem principal.");
-        return "redirect:/recompensas/trash-list-recompensa?page=0&size=5";
+        return "redirect:/recompensas/trash-list-recompensas?page=0&size=5";
     }
 
 }

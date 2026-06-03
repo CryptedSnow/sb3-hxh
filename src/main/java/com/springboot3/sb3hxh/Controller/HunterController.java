@@ -35,7 +35,7 @@ public class HunterController {
         return "/hunter/list-hunters";
     }
 
-    @GetMapping("/search-hunter")
+    @GetMapping("/search-hunters")
     public String buscarHunter(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Hunter> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunter(search, page, size) : hunterService.indexHuntersPagination(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
@@ -117,7 +117,7 @@ public class HunterController {
         return "/hunter/trash-hunter";
     }
 
-    @GetMapping("/search-hunter-trash")
+    @GetMapping("/search-hunters-trash")
     public String searchHunterTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Hunter> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunterTrash(search, page, size) : hunterService.indexHuntersTrash(page, size);
         model.addAttribute("hunters", hunterPage.getContent());

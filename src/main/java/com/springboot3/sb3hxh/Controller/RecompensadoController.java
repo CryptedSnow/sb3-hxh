@@ -43,7 +43,7 @@ public class RecompensadoController {
         return "/recompensado/list-recompensados";
     }
 
-    @GetMapping("/search-recompensado")
+    @GetMapping("/search-recompensados")
     public String searchRecompensado(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensado> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.buscarRecompensado(search, page, size) : recompensadoService.indexRecompensadosPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
@@ -127,7 +127,7 @@ public class RecompensadoController {
         return "/recompensado/trash-recompensado";
     }
 
-    @GetMapping("/search-recompensado-trash")
+    @GetMapping("/search-recompensados-trash")
     public String searchRecompensadoTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensado> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.buscarRecompensadoTrash(search, page, size) : recompensadoService.indexRecompensadosPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
