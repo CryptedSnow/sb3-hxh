@@ -108,7 +108,7 @@ public class HunterController {
         return "redirect:/hunters/list-hunters?page=0&size=5";
     }
 
-    @GetMapping("/trash-list-hunter")
+    @GetMapping("/trash-list-hunters")
     public String listTrashHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Hunter> hunterPage = hunterService.indexHuntersTrash(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
@@ -135,7 +135,7 @@ public class HunterController {
         hunterService.restoreHunter(id);
         log.info("Hunter {} foi restaurado(a) para a listagem principal.", nome);
         redirectAttributes.addFlashAttribute("success_store", "Hunter " + nome + " foi restaurado para a listagem principal.");
-        return "redirect:/hunters/trash-list-hunter?page=0&size=5";
+        return "redirect:/hunters/trash-list-hunters?page=0&size=5";
     }
 
 }

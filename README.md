@@ -26,10 +26,10 @@ sb3-hxh
         │       │   ├── TipoHunterEnum.java  
         │       │   ├── TipoNenEnum.java  
         │       │   └── TipoSanguineoEnum.java
-        │       ├── Entity 
-        │       │   ├── HunterEntity.java  
-        │       │   ├── RecompensaEntity.java  
-        │       │   └── RecompensadoEntity.java   
+        │       ├── Repository 
+        │       │   ├── HunterRepository.java  
+        │       │   ├── RecompensaRepository.java  
+        │       │   └── RecompensadoRepository.java   
         │       └── Service  
         │           ├── HunterService.java  
         │           ├── RecompensadoService.java  

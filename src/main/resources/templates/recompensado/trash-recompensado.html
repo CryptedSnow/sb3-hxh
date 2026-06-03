@@ -57,8 +57,8 @@
     <div class="pagination justify-content-center" th:if="${totalPages > 0}">
         <ul class="pagination">
             <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? ' active' : ''">
-                <a class="page-link" th:if="${search != null}" th:href="@{/recompensados/filtrar-recompensado-trash(search=${search}, page=${i}, size=${size})}">[[${i + 1}]]</a>
-                <a class="page-link" th:if="${search == null}" th:href="@{/recompensados/list(page=${i}, size=${size})}">[[${i + 1}]]</a>
+                <a class="page-link" th:if="${search != null}" th:href="@{/recompensados/filtrar-recompensados-trash(search=${search}, page=${i}, size=${size})}">[[${i + 1}]]</a>
+                <a class="page-link" th:if="${search == null}" th:href="@{/recompensados/trash-list-recompensados(page=${i}, size=${size})}">[[${i + 1}]]</a>
             </li>
         </ul>
     </div>

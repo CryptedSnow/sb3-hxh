@@ -118,7 +118,7 @@ public class RecompensadoController {
         return "redirect:/recompensados/list-recompensados?page=0&size=5";
     }
 
-    @GetMapping("/trash-list-recompensado")
+    @GetMapping("/trash-list-recompensados")
     public String listTrashRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensado> recompensadoPage = recompensadoService.indexRecompensadosTrash(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
@@ -144,7 +144,7 @@ public class RecompensadoController {
         recompensadoService.restoreRecompensado(id);
         log.info("Recompensado(a) {} foi restaurado(a) para a listagem principal.", recompensado.getHunterId().getNomeHunter());
         redirectAttributes.addFlashAttribute("success_store", "Recompensado(a) " + recompensado.getHunterId().getNomeHunter() + " foi restaurado(a) para a listagem principal.");
-        return "redirect:/recompensados/trash-list-recompensado?page=0&size=5";
+        return "redirect:/recompensados/trash-list-recompensados?page=0&size=5";
     }
 
 }

@@ -54,7 +54,7 @@
         <ul class="pagination">
             <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? ' active' : ''">
                 <a class="page-link" th:if="${search != null}" th:href="@{/recompensas/filtrar-recompensa-trash(search=${search}, page=${i}, size=${size})}">[[${i + 1}]]</a>
-                <a class="page-link" th:if="${search == null}" th:href="@{/recompensas/list(page=${i}, size=${size})}">[[${i + 1}]]</a>
+                <a class="page-link" th:if="${search == null}" th:href="@{/recompensas/trash-list-recompensa(page=${i}, size=${size})}">[[${i + 1}]]</a>
             </li>
         </ul>
     </div>

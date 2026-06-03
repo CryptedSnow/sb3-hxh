@@ -68,7 +68,7 @@
         <ul class="pagination">
             <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? ' active' : ''">
                 <a class="page-link" th:if="${search != null}" th:href="@{/hunters/filtrar-hunter-trash(search=${search}, page=${i}, size=${size})}">[[${i + 1}]]</a>
-                <a class="page-link" th:if="${search == null}" th:href="@{/hunters/list(page=${i}, size=${size})}">[[${i + 1}]]</a>
+                <a class="page-link" th:if="${search == null}" th:href="@{/hunters/trash-list-hunters(page=${i}, size=${size})}">[[${i + 1}]]</a>
             </li>
         </ul>
     </div>
