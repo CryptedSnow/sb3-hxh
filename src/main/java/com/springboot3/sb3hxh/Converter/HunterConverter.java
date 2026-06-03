@@ -20,7 +20,7 @@ public class HunterConverter implements Converter<String, Hunter> {
             return null;
         }
         int id = Integer.parseInt(source);
-        return hunterService.read(id);
+        return hunterService.findIdHunter(id);
     }
 
 }

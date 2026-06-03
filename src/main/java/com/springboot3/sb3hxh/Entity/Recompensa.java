@@ -31,7 +31,7 @@ public class Recompensa {
     private Float valorRecompensa;
 
     @Column(name = "deleted_at")
-    private LocalDateTime deleted_at;
+    private LocalDateTime deletedAt;
 
     public Recompensa() {
 
@@ -41,7 +41,7 @@ public class Recompensa {
         this.id = id;
         this.descricaoRecompensa = descricao_recompensa;
         this.valorRecompensa = valor_recompensa;
-        this.deleted_at = deleted_at;
+        this.deletedAt = deleted_at;
     }
 
     public int getId() {
@@ -69,11 +69,11 @@ public class Recompensa {
     }
 
     public LocalDateTime getDeletedAt() {
-        return deleted_at;
+        return deletedAt;
     }
 
     public void setDeletedAt(LocalDateTime deleted_at) {
-        this.deleted_at = deleted_at;
+        this.deletedAt = deleted_at;
     }
 
     public String valorRecompensaFormatado() {

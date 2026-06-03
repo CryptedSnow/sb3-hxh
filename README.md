@@ -2,7 +2,7 @@
 
 ```
 sb3-hxh  
-├── src  
+└── src  
     └── main  
         ├── java  
         │   └── com.springboot3.sb3hxh
@@ -18,10 +18,6 @@ sb3-hxh
         │       │   ├── TipoHunterConverter.java  
         │       │   ├── TipoNenConverter.java
         │       │   └── TipoSanguineoConverter.java  
-        │       ├── DAO  
-        │       │   ├── HunterDAO.java  
-        │       │   ├── RecompensaDAO.java  
-        │       │   └── RecompensadoDAO.java  
         │       ├── Entity  
         │       │   ├── HunterEntity.java  
         │       │   ├── RecompensadoEntity.java  
@@ -29,7 +25,11 @@ sb3-hxh
         │       ├── Enum  
         │       │   ├── TipoHunterEnum.java  
         │       │   ├── TipoNenEnum.java  
-        │       │   └── TipoSanguineoEnum.java    
+        │       │   └── TipoSanguineoEnum.java
+        │       ├── Entity 
+        │       │   ├── HunterEntity.java  
+        │       │   ├── RecompensaEntity.java  
+        │       │   └── RecompensadoEntity.java   
         │       └── Service  
         │           ├── HunterService.java  
         │           ├── RecompensadoService.java  
@@ -55,7 +55,7 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 * ```Service``` folder: Logic of application methods (extends ```DAO, Entity``` class).
 
 3 - Data tier:
-* ```DAO``` folder: Access the database (extends ```Entity``` class).
+* ```Repository``` folder: Access the database (extends ```Entity``` class).
 * ```Entity``` folder: Represent the database informations.
 
 4 - Foreign key converter

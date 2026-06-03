@@ -1,13 +1,8 @@
 package com.springboot3.sb3hxh.Service;
 
-import com.springboot3.sb3hxh.DAO.RecompensaDAO;
+import com.springboot3.sb3hxh.Repository.RecompensaRepository;
 import com.springboot3.sb3hxh.Entity.Recompensa;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -15,122 +10,63 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class RecompensaService implements RecompensaDAO {
+public class RecompensaService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final RecompensaRepository recompensaRepository;
 
-    public RecompensaService(EntityManager theEntityManager) {
-        this.entityManager = theEntityManager;
+    public RecompensaService(RecompensaRepository recompensaRepository) {
+        this.recompensaRepository = recompensaRepository;
     }
 
-    @Override
-    public List<Recompensa> index() {
-        TypedQuery<Recompensa> query = entityManager.createQuery("SELECT recompensa FROM Recompensa recompensa WHERE recompensa.deleted_at IS NULL ORDER BY recompensa.id ASC", Recompensa.class);
-        return query.getResultList();
+    public List<Recompensa> indexRecompensas() {
+        return recompensaRepository.findByDeletedAtIsNullOrderByIdAsc();
     }
 
-    @Override
-    public Page<Recompensa> indexPagination(int page, int size) {
-        TypedQuery<Recompensa> query = entityManager.createQuery("SELECT recompensa FROM Recompensa recompensa WHERE recompensa.deleted_at IS NULL ORDER BY recompensa.id ASC", Recompensa.class);
-        long totalCount = entityManager.createQuery("SELECT COUNT(recompensa) FROM Recompensa recompensa WHERE recompensa.deleted_at IS NULL", Long.class).getSingleResult();
-        query.setFirstResult(page * size);
-        query.setMaxResults(size);
-        List<Recompensa> recompensas = query.getResultList();
-        return new PageImpl<>(recompensas, PageRequest.of(page, size), totalCount);
+    public Page<Recompensa> indexRecompensasPagination(int page, int size) {
+        return recompensaRepository.findByDeletedAtIsNullOrderByIdAsc(PageRequest.of(page, size));
     }
 
-    public Page<Recompensa> searchRecompensa(String search, int page, int size) {
-        TypedQuery<Recompensa> query = entityManager.createQuery("SELECT recompensa FROM Recompensa recompensa " +
-                "WHERE recompensa.deleted_at IS NULL " +
-                "AND LOWER(recompensa.descricao_recompensa) LIKE LOWER(:search) " +
-                "ORDER BY recompensa.id ASC", Recompensa.class);
-        query.setParameter("search", "%" + search + "%");
-        long totalCount = entityManager.createQuery("SELECT COUNT(recompensa) FROM Recompensa recompensa WHERE recompensa.deleted_at IS NULL AND LOWER(r.descricao_recompensa) LIKE LOWER(:search)", Long.class)
-                .setParameter("search", "%" + search + "%")
-                .getSingleResult();
-        query.setFirstResult(page * size);
-        query.setMaxResults(size);
-        List<Recompensa> recompensas = query.getResultList();
-        return new PageImpl<>(recompensas, PageRequest.of(page, size), totalCount);
+    public Page<Recompensa> buscarRecompensa(String search, int page, int size) {
+        return recompensaRepository.searchAtivos(search, PageRequest.of(page, size));
     }
 
-    @Override
-    @Transactional
-    public Recompensa create(Recompensa theRecompensaEntity) {
-        entityManager.persist(theRecompensaEntity);
-        return theRecompensaEntity;
+    public Recompensa createRecompensa(Recompensa recompensa) {
+        return recompensaRepository.save(recompensa);
     }
 
-    @Override
-    public Recompensa read(int id) {
-        return entityManager.find(Recompensa.class, id);
+    public Recompensa findRecompensaId(int id) {
+        return recompensaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Recompensa ID " + id + " não encontrada."));
     }
 
-    @Override
-    @Transactional
-    public Recompensa update(Recompensa theRecompensaEntity) {
-        Recompensa recompensa = entityManager.merge(theRecompensaEntity);
-        return recompensa;
+    public Recompensa updateRecompensa(Recompensa recompensa) {
+        return recompensaRepository.save(recompensa);
     }
 
-    @Override
-    @Transactional
-    public void trash(int id) {
-        Recompensa recompensa = entityManager.find(Recompensa.class, id);
-        if (recompensa != null) {
-            recompensa.setDeletedAt(LocalDateTime.now());
-            entityManager.merge(recompensa);
-        }
+    public void deleteRecompensaToTrash(int id) {
+        Recompensa recompensa = findRecompensaId(id);
+        recompensa.setDeletedAt(LocalDateTime.now());
+        recompensaRepository.save(recompensa);
     }
 
-    @Override
-    public Page<Recompensa> indexTrash(int page, int size) {
-        TypedQuery<Recompensa> query = entityManager.createQuery("SELECT recompensa FROM Recompensa recompensa WHERE recompensa.deleted_at IS NOT NULL ORDER BY recompensa.id ASC", Recompensa.class);
-        long totalCount = entityManager.createQuery("SELECT COUNT(recompensa) FROM Recompensa recompensa WHERE recompensa.deleted_at IS NOT NULL", Long.class).getSingleResult();
-        query.setFirstResult(page * size);
-        query.setMaxResults(size);
-        List<Recompensa> recompensas = query.getResultList();
-        return new PageImpl<>(recompensas, PageRequest.of(page, size), totalCount);
+    public Page<Recompensa> indexRecompensasTrash(int page, int size) {
+        return recompensaRepository.findByDeletedAtIsNotNullOrderByIdAsc(PageRequest.of(page, size));
     }
 
-    public Page<Recompensa> searchRecompensaTrash(String search, int page, int size) {
-        TypedQuery<Recompensa> query = entityManager.createQuery("SELECT recompensa FROM Recompensa recompensa " +
-                "WHERE recompensa.deleted_at IS NOT NULL " +
-                "AND LOWER(recompensa.descricao_recompensa) LIKE LOWER(:search) " +
-                "ORDER BY recompensa.id ASC", Recompensa.class);
-        query.setParameter("search", "%" + search + "%");
-        long totalCount = entityManager.createQuery("SELECT COUNT(recompensa) FROM Recompensa recompensa WHERE recompensa.deleted_at IS NOT NULL AND LOWER(recompensa.descricao_recompensa) LIKE LOWER(:search)", Long.class)
-                .setParameter("search", "%" + search + "%")
-                .getSingleResult();
-        query.setFirstResult(page * size);
-        query.setMaxResults(size);
-        List<Recompensa> recompensas = query.getResultList();
-        return new PageImpl<>(recompensas, PageRequest.of(page, size), totalCount);
+    public Page<Recompensa> buscarRecompensaTrash(String search, int page, int size) {
+        return recompensaRepository.searchLixeira(search, PageRequest.of(page, size));
     }
 
-    @Override
-    @Transactional
-    public Recompensa restore(int id) {
-        Recompensa recompensa = entityManager.find(Recompensa.class, id);
-        if (recompensa != null) {
-            recompensa.setDeletedAt(null);
-            entityManager.persist(recompensa);
-        } else {
-            throw new IllegalArgumentException("Registro não encontrado com o ID fornecido: " + id);
-        }
-        return recompensa;
+    public Recompensa restoreRecompensa(int id) {
+        Recompensa recompensa = findRecompensaId(id);
+        recompensa.setDeletedAt(null);
+        return recompensaRepository.save(recompensa);
     }
 
-    @Override
     public boolean existsId(String id) {
         try {
-            int idAsInt = Integer.parseInt(id);
-            Recompensa recompensa = entityManager.find(Recompensa.class, idAsInt);
-            return recompensa != null;
+            return recompensaRepository.existsById(Integer.parseInt(id));
         } catch (NumberFormatException e) {
             return false;
         }
     }
-
 }
