@@ -24,7 +24,7 @@ public class RecompensaController {
     }
 
     @GetMapping("/list-recompensas")
-    public String listRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String indexRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensa> recompensaPage = recompensaService.indexRecompensasPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
@@ -33,8 +33,8 @@ public class RecompensaController {
     }
 
     @GetMapping("/search-recompensas")
-    public String searchRecompensa(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.buscarRecompensa(search, page, size) : recompensaService.indexRecompensasPagination(page, size);
+    public String searchRecompensas(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensas(search, page, size) : recompensaService.indexRecompensasPagination(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
         model.addAttribute("totalPages", recompensaPage.getTotalPages());
@@ -92,7 +92,7 @@ public class RecompensaController {
     }
 
     @GetMapping("/delete-recompensa/{id}")
-    public String deleteRecompensa(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+    public String deleteRecompensaToTrash(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         Recompensa recompensaEntity = recompensaService.findRecompensaId(id);
         String descricao = recompensaEntity.getDescricaoRecompensa();
         recompensaService.deleteRecompensaToTrash(id);
@@ -102,7 +102,7 @@ public class RecompensaController {
     }
 
     @GetMapping("/trash-list-recompensas")
-    public String listTrashRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String indexTrashRecompensas(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensa> recompensaPage = recompensaService.indexRecompensasTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
@@ -111,8 +111,8 @@ public class RecompensaController {
     }
 
     @GetMapping("/search-recompensas-trash")
-    public String filtrarRecompensaTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.buscarRecompensaTrash(search, page, size) : recompensaService.indexRecompensasTrash(page, size);
+    public String searchRecompensasTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Recompensa> recompensaPage = (search != null && !search.isEmpty()) ? recompensaService.searchRecompensasTrash(search, page, size) : recompensaService.indexRecompensasTrash(page, size);
         model.addAttribute("recompensas", recompensaPage.getContent());
         model.addAttribute("currentPage", recompensaPage.getNumber());
         model.addAttribute("totalPages", recompensaPage.getTotalPages());

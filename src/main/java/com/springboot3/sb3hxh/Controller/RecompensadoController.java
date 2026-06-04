@@ -35,7 +35,7 @@ public class RecompensadoController {
     }
 
     @GetMapping("/list-recompensados")
-    public String listRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String indexRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensado> recompensadoPage = recompensadoService.indexRecompensadosPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
@@ -44,8 +44,8 @@ public class RecompensadoController {
     }
 
     @GetMapping("/search-recompensados")
-    public String searchRecompensado(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Recompensado> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.buscarRecompensado(search, page, size) : recompensadoService.indexRecompensadosPagination(page, size);
+    public String searchRecompensados(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Recompensado> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.searchRecompensados(search, page, size) : recompensadoService.indexRecompensadosPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
         model.addAttribute("totalPages", recompensadoPage.getTotalPages());
@@ -110,7 +110,7 @@ public class RecompensadoController {
     }
 
     @GetMapping("/delete-recompensado/{id}")
-    public String deleteRecompensado(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+    public String deleteRecompensadoToTrash(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         Recompensado recompensado = recompensadoService.findIdRecompensado(id); // ✅
         recompensadoService.deleteRecompensadoToTrash(id);
         log.info("Recompensado(a) {} foi enviado(a) para a lixeira.", recompensado.getHunterId().getNomeHunter());
@@ -119,7 +119,7 @@ public class RecompensadoController {
     }
 
     @GetMapping("/trash-list-recompensados")
-    public String listTrashRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String indexTrashRecompensados(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Recompensado> recompensadoPage = recompensadoService.indexRecompensadosTrash(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
@@ -128,8 +128,8 @@ public class RecompensadoController {
     }
 
     @GetMapping("/search-recompensados-trash")
-    public String searchRecompensadoTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Recompensado> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.buscarRecompensadoTrash(search, page, size) : recompensadoService.indexRecompensadosPagination(page, size);
+    public String searchRecompensadosTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Recompensado> recompensadoPage = (search != null && !search.isEmpty()) ? recompensadoService.searchRecompensadosTrash(search, page, size) : recompensadoService.indexRecompensadosPagination(page, size);
         model.addAttribute("recompensados", recompensadoPage.getContent());
         model.addAttribute("currentPage", recompensadoPage.getNumber());
         model.addAttribute("totalPages", recompensadoPage.getTotalPages());

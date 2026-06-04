@@ -26,7 +26,7 @@ public class RecompensaService {
         return recompensaRepository.findByDeletedAtIsNullOrderByIdAsc(PageRequest.of(page, size));
     }
 
-    public Page<Recompensa> buscarRecompensa(String search, int page, int size) {
+    public Page<Recompensa> searchRecompensas(String search, int page, int size) {
         return recompensaRepository.searchAtivos(search, PageRequest.of(page, size));
     }
 
@@ -52,7 +52,7 @@ public class RecompensaService {
         return recompensaRepository.findByDeletedAtIsNotNullOrderByIdAsc(PageRequest.of(page, size));
     }
 
-    public Page<Recompensa> buscarRecompensaTrash(String search, int page, int size) {
+    public Page<Recompensa> searchRecompensasTrash(String search, int page, int size) {
         return recompensaRepository.searchLixeira(search, PageRequest.of(page, size));
     }
 
@@ -62,11 +62,4 @@ public class RecompensaService {
         return recompensaRepository.save(recompensa);
     }
 
-    public boolean existsId(String id) {
-        try {
-            return recompensaRepository.existsById(Integer.parseInt(id));
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 }

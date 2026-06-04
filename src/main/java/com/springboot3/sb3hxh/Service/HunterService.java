@@ -26,7 +26,7 @@ public class HunterService {
         return hunterRepository.findByDeletedAtIsNullOrderByIdAsc(PageRequest.of(page, size));
     }
 
-    public Page<Hunter> searchHunter(String search, int page, int size) {
+    public Page<Hunter> searchHunters(String search, int page, int size) {
         return hunterRepository.searchAtivos(search, PageRequest.of(page, size));
     }
 
@@ -52,7 +52,7 @@ public class HunterService {
         return hunterRepository.findByDeletedAtIsNotNullOrderByIdAsc(PageRequest.of(page, size));
     }
 
-    public Page<Hunter> searchHunterTrash(String search, int page, int size) {
+    public Page<Hunter> searchHuntersTrash(String search, int page, int size) {
         return hunterRepository.searchLixeira(search, PageRequest.of(page, size));
     }
 
@@ -62,11 +62,4 @@ public class HunterService {
         return hunterRepository.save(hunter);
     }
 
-    public boolean existsId(String id) {
-        try {
-            return hunterRepository.existsById(Integer.parseInt(id));
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 }

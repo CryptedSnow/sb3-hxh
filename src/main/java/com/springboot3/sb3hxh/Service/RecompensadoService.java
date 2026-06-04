@@ -26,7 +26,7 @@ public class RecompensadoService {
         return recompensadoRepository.findAllAtivosPaginated(PageRequest.of(page, size));
     }
 
-    public Page<Recompensado> buscarRecompensado(String search, int page, int size) {
+    public Page<Recompensado> searchRecompensados(String search, int page, int size) {
         return recompensadoRepository.searchAtivos(search, PageRequest.of(page, size));
     }
 
@@ -49,7 +49,7 @@ public class RecompensadoService {
         return recompensadoRepository.findAllLixeiraPaginated(PageRequest.of(page, size));
     }
 
-    public Page<Recompensado> buscarRecompensadoTrash(String search, int page, int size) {
+    public Page<Recompensado> searchRecompensadosTrash(String search, int page, int size) {
         return recompensadoRepository.searchLixeira(search, PageRequest.of(page, size));
     }
 
@@ -58,4 +58,5 @@ public class RecompensadoService {
         recompensado.setDeletedAt(null);
         return recompensadoRepository.save(recompensado);
     }
+
 }

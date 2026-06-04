@@ -27,7 +27,7 @@ public class HunterController {
     }
 
     @GetMapping("/list-hunters")
-    public String listHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    public String indexHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Page<Hunter> hunterPage = hunterService.indexHuntersPagination(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
@@ -36,8 +36,8 @@ public class HunterController {
     }
 
     @GetMapping("/search-hunters")
-    public String buscarHunter(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Hunter> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunter(search, page, size) : hunterService.indexHuntersPagination(page, size);
+    public String searchHunters(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Hunter> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunters(search, page, size) : hunterService.indexHuntersPagination(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
         model.addAttribute("totalPages", hunterPage.getTotalPages());
@@ -99,7 +99,7 @@ public class HunterController {
     }
 
     @GetMapping("/deletar-hunter/{id}")
-    public String deletarHunter(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+    public String deleteHunterToTrash(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
         Hunter hunterEntity = hunterService.findIdHunter(id);
         String nome = hunterEntity.getNomeHunter();
         hunterService.deleteHunterToTrash(id);
@@ -109,7 +109,7 @@ public class HunterController {
     }
 
     @GetMapping("/trash-list-hunters")
-    public String listTrashHunters(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String indexHuntersTrash(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         Page<Hunter> hunterPage = hunterService.indexHuntersTrash(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
@@ -118,8 +118,8 @@ public class HunterController {
     }
 
     @GetMapping("/search-hunters-trash")
-    public String searchHunterTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Hunter> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHunterTrash(search, page, size) : hunterService.indexHuntersTrash(page, size);
+    public String searchHuntersTrash(@RequestParam(name = "search", required = false) String search, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Hunter> hunterPage = (search != null && !search.isEmpty()) ? hunterService.searchHuntersTrash(search, page, size) : hunterService.indexHuntersTrash(page, size);
         model.addAttribute("hunters", hunterPage.getContent());
         model.addAttribute("currentPage", hunterPage.getNumber());
         model.addAttribute("totalPages", hunterPage.getTotalPages());
