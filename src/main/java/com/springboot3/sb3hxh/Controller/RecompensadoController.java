@@ -56,11 +56,11 @@ public class RecompensadoController {
 
     @GetMapping("/form-create-recompensado")
     public String formCreateRecompensado(Model model){
-        Recompensado recompesadoModel = new Recompensado();
-        List<Hunter> hunterEntity = hunterService.indexHunters();
-        List<Recompensa> recompensaEntity = recompensaService.indexRecompensas();
+        Recompensado recompesado = new Recompensado();
+        List<Hunter> hunter = hunterService.indexHunters();
+        List<Recompensa> recompensasIndex = recompensaService.indexRecompensas();
         List<Recompensa> recompensasDisponiveis = new ArrayList<>();
-        for (Recompensa recompensa : recompensaEntity) {
+        for (Recompensa recompensa : recompensasIndex) {
             boolean jaAssociado = false;
             for (Recompensado recompensado : recompensadoService.indexRecompensados()) {
                 if (recompensado.getRecompensaId().equals(recompensa)) {
@@ -72,18 +72,18 @@ public class RecompensadoController {
                 recompensasDisponiveis.add(recompensa);
             }
         }
-        model.addAttribute("recompensado", recompesadoModel);
-        model.addAttribute("hunter", hunterEntity);
+        model.addAttribute("recompensado", recompesado);
+        model.addAttribute("hunter", hunter);
         model.addAttribute("recompensa", recompensasDisponiveis);
         return "/recompensado/create-recompensado";
     }
 
     @PostMapping("/create-recompensado")
     public String createRecompensado(@ModelAttribute("recompensado") @Valid Recompensado recompensadoEntity, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-        List<Hunter> hunterEntity = hunterService.indexHunters();
-        List<Recompensa> recompensaEntity = recompensaService.indexRecompensas();
+        List<Hunter> hunter = hunterService.indexHunters();
+        List<Recompensa> recompensaIndex = recompensaService.indexRecompensas();
         List<Recompensa> recompensasDisponiveis = new ArrayList<>();
-        for (Recompensa recompensa : recompensaEntity) {
+        for (Recompensa recompensa : recompensaIndex) {
             boolean jaAssociado = false;
             for (Recompensado recompensado : recompensadoService.indexRecompensados()) {
                 if (recompensado.getRecompensaId().equals(recompensa)) {
@@ -95,7 +95,7 @@ public class RecompensadoController {
                 recompensasDisponiveis.add(recompensa);
             }
         }
-        model.addAttribute("hunter", hunterEntity);
+        model.addAttribute("hunter", hunter);
         model.addAttribute("recompensa", recompensasDisponiveis);
         if (bindingResult.hasErrors()) {
             log.warn("Erros de validações encontrados no formulário: {}", bindingResult.getAllErrors());
@@ -111,7 +111,7 @@ public class RecompensadoController {
 
     @GetMapping("/delete-recompensado/{id}")
     public String deleteRecompensadoToTrash(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        Recompensado recompensado = recompensadoService.findIdRecompensado(id); // ✅
+        Recompensado recompensado = recompensadoService.findIdRecompensado(id);
         recompensadoService.deleteRecompensadoToTrash(id);
         log.info("Recompensado(a) {} foi enviado(a) para a lixeira.", recompensado.getHunterId().getNomeHunter());
         redirectAttributes.addFlashAttribute("success_delete", "Recompensado(a) " + recompensado.getHunterId().getNomeHunter() + " está na lixeira.");
@@ -140,7 +140,7 @@ public class RecompensadoController {
 
     @GetMapping("/restore-recompensado/{id}")
     public String restoreRecompensado(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        Recompensado recompensado = recompensadoService.findIdRecompensado(id); // ✅
+        Recompensado recompensado = recompensadoService.findIdRecompensado(id);
         recompensadoService.restoreRecompensado(id);
         log.info("Recompensado(a) {} foi restaurado(a) para a listagem principal.", recompensado.getHunterId().getNomeHunter());
         redirectAttributes.addFlashAttribute("success_store", "Recompensado(a) " + recompensado.getHunterId().getNomeHunter() + " foi restaurado(a) para a listagem principal.");
