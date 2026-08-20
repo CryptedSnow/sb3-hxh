@@ -52,7 +52,6 @@ public class RecompensaController {
 
     @PostMapping("/create-recompensa")
     public String createRecompensa(@ModelAttribute("recompensa") @Valid Recompensa recompensaEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        System.out.println(recompensaEntity);
         if (bindingResult.hasErrors()) {
             log.warn("Erros de validações encontrados no formulário: {}", bindingResult.getAllErrors());
             return "/recompensa/create-recompensa";
