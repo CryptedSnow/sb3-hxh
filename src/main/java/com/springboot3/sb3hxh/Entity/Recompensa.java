@@ -6,6 +6,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -28,7 +29,7 @@ public class Recompensa {
     @DecimalMin(value = "0.00", message = "O valor deve ser no mínimo R$ 0,00")
     @DecimalMax(value = "1000000.00", message = "O valor deve ser no máximo R$ 1.000.000,00")
     @Column(name="valor_recompensa")
-    private Float valorRecompensa;
+    private BigDecimal valorRecompensa;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
@@ -37,7 +38,7 @@ public class Recompensa {
 
     }
 
-    public Recompensa(int id, String descricao_recompensa, Float valor_recompensa, LocalDateTime deleted_at) {
+    public Recompensa(int id, String descricao_recompensa, BigDecimal valor_recompensa, LocalDateTime deleted_at) {
         this.id = id;
         this.descricaoRecompensa = descricao_recompensa;
         this.valorRecompensa = valor_recompensa;
@@ -60,11 +61,11 @@ public class Recompensa {
         this.descricaoRecompensa = descricao_recompensa;
     }
 
-    public Float getValorRecompensa() {
+    public BigDecimal getValorRecompensa() {
         return valorRecompensa;
     }
 
-    public void setValorRecompensa(Float valor_recompensa) {
+    public void setValorRecompensa(BigDecimal valor_recompensa) {
         this.valorRecompensa = valor_recompensa;
     }
 

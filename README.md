@@ -1,46 +1,4 @@
-# Application (map)
-
-```
-sb3-hxh  
-└── src  
-    └── main  
-        ├── java  
-        │   └── com.springboot3.sb3hxh
-        │       ├── Configuration 
-        │       │   └── IconConfiguration.java    
-        │       ├── Controller  
-        │       │   ├── HunterController.java  
-        │       │   ├── RecompensaController.java  
-        │       │   └── RecompensadoController.java  
-        │       ├── Converter  
-        │       │   ├── HunterConverter.java  
-        │       │   ├── RecompensaConverter.java
-        │       │   ├── TipoHunterConverter.java  
-        │       │   ├── TipoNenConverter.java
-        │       │   └── TipoSanguineoConverter.java  
-        │       ├── Entity  
-        │       │   ├── HunterEntity.java  
-        │       │   ├── RecompensadoEntity.java  
-        │       │   └── RecompensaEntity.java
-        │       ├── Enum  
-        │       │   ├── TipoHunterEnum.java  
-        │       │   ├── TipoNenEnum.java  
-        │       │   └── TipoSanguineoEnum.java
-        │       ├── Repository 
-        │       │   ├── HunterRepository.java  
-        │       │   ├── RecompensaRepository.java  
-        │       │   └── RecompensadoRepository.java   
-        │       └── Service  
-        │           ├── HunterService.java  
-        │           ├── RecompensadoService.java  
-        │           └── RecompensaService.java            
-        └── resources 
-            ├── static  
-            ├── templates  
-            └── application.properties  
-```
-
-It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to use [IntelliJ IDEA](https://www.jetbrains.com/idea/) to facilitate your experience.
+It's necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to use [IntelliJ IDEA](https://www.jetbrains.com/idea/) to facilitate your experience.
 
 ### Application structure pattern
 
@@ -104,6 +62,32 @@ spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
+```Flyway``` to insert the lines:
+
+```
+# MySQL
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.flyway.locations=classpath:database/migrations/MySQL
+
+# Postgres
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.flyway.locations=classpath:database/migrations/PostgreSQL
+```
+
+```Flyway``` command without ```Docker```:
+```
+# MySQL
+java -jar target/*.jar --spring.profiles.active=mysql
+
+# PostgreSQL
+java -jar target/*.jar --spring.profiles.active=postgres
+```
+
+```Flyway``` command with ```Docker```:
+```
+docker compose up -d --build
+```
+
 ### Panels
 
 - phpMyAdmin: http://localhost:8081
@@ -119,71 +103,3 @@ To create a server to pgAdmin:
 - Maintenance database:	```postgres```
 - Username:	```user```
 - Password:	```password```
-
-Create table to **PostgreSQL** database:
-```
-CREATE TABLE hunters (
-	id SERIAL PRIMARY KEY,
-	nome_hunter VARCHAR(50) NOT NULL,
-	idade_hunter INT NOT NULL,
-	altura_hunter DECIMAL(3,2) NOT NULL,
-	peso_hunter DECIMAL(5,2) NOT NULL,
-	tipo_hunter VARCHAR(50) NOT NULL,
-	tipo_nen VARCHAR(15) NOT NULL,
-	tipo_sanguineo VARCHAR(3) NOT NULL,
-	inicio DATE,
-	termino DATE,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE recompensas (
-	id SERIAL PRIMARY KEY,
-	descricao_recompensa VARCHAR(255) NOT NULL,
-	valor_recompensa DECIMAL(10,2) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE recompensados (
-	id SERIAL PRIMARY KEY,
-	hunter_id INT NOT NULL,
-	recompensa_id INT NOT NULL,
-	status BOOLEAN NOT NULL,
-	deleted_at TIMESTAMP,
-	FOREIGN KEY (hunter_id) REFERENCES hunters (id),
-	FOREIGN KEY (recompensa_id) REFERENCES recompensas (id)
-);
-```
-
-Create tables to **MySQL** database:
-```
-CREATE TABLE hunters (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome_hunter VARCHAR(50) NOT NULL,
-	idade_hunter INT NOT NULL,
-	altura_hunter DECIMAL(3,2) NOT NULL,
-	peso_hunter DECIMAL(5,2) NOT NULL,
-	tipo_hunter VARCHAR(50) NOT NULL,
-	tipo_nen VARCHAR(15) NOT NULL,
-	tipo_sanguineo VARCHAR(3) NOT NULL,
-	inicio DATE,
-	termino DATE,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE recompensas (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao_recompensa VARCHAR(255) NOT NULL,
-	valor_recompensa DECIMAL(10,2) NOT NULL,
-	deleted_at TIMESTAMP
-);
-
-CREATE TABLE recompensados (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	hunter_id INT NOT NULL,
-	recompensa_id INT NOT NULL,
-	status BOOLEAN NOT NULL,
-	deleted_at TIMESTAMP,
-	FOREIGN KEY (hunter_id) REFERENCES hunters (id),
-	FOREIGN KEY (recompensa_id) REFERENCES recompensas (id)
-);
-```

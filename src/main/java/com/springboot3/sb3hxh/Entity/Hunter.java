@@ -10,10 +10,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name="hunters")
@@ -38,13 +39,13 @@ public class Hunter {
     @DecimalMin(value = "1.50", message = "A altura deve ser no mínimo 1.50m")
     @DecimalMax(value = "2.50", message = "A altura deve ser no máximo 2.50m")
     @Column(name="altura_hunter")
-    private Float alturaHunter;
+    private BigDecimal alturaHunter;
 
     @NotNull(message = "O peso do Hunter é requerido")
     @DecimalMin(value = "50.00", message = "O peso do Hunter deve ser no mínimo 50.00kg")
     @DecimalMax(value = "150.00", message = "O peso do Hunter deve ser no máximo 150.00kg")
     @Column(name="peso_hunter")
-    private Float pesoHunter;
+    private BigDecimal pesoHunter;
 
     @NotNull(message = "O tipo de Hunter é requerido")
     @Convert(converter = TipoHunterConverter.class)
@@ -63,11 +64,11 @@ public class Hunter {
 
     @NotNull(message = "A data de início é requerida")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date inicio;
+    private LocalDate inicio;
 
     @NotNull(message = "A data de término é requerida")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date termino;
+    private LocalDate termino;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
@@ -76,7 +77,7 @@ public class Hunter {
 
     }
 
-    public Hunter(int id, String nome_hunter, Integer idade_hunter, Float altura_hunter, Float peso_hunter, TipoHunterEnum tipo_hunter, TipoNenEnum tipo_nen, TipoSanguineoEnum tipo_sanguineo, Date inicio, Date termino, LocalDateTime deleted_at) {
+    public Hunter(int id, String nome_hunter, Integer idade_hunter, BigDecimal altura_hunter, BigDecimal peso_hunter, TipoHunterEnum tipo_hunter, TipoNenEnum tipo_nen, TipoSanguineoEnum tipo_sanguineo, LocalDate inicio, LocalDate termino, LocalDateTime deleted_at) {
         this.id = id;
         this.nomeHunter = nome_hunter;
         this.idadeHunter = idade_hunter;
@@ -114,19 +115,19 @@ public class Hunter {
         this.idadeHunter = idade_hunter;
     }
 
-    public Float getAlturaHunter() {
+    public BigDecimal getAlturaHunter() {
         return alturaHunter;
     }
 
-    public void setAlturaHunter(Float altura_hunter) {
+    public void setAlturaHunter(BigDecimal altura_hunter) {
         this.alturaHunter = altura_hunter;
     }
 
-    public Float getPesoHunter() {
+    public BigDecimal getPesoHunter() {
         return pesoHunter;
     }
 
-    public void setPesoHunter(Float peso_hunter) {
+    public void setPesoHunter(BigDecimal peso_hunter) {
         this.pesoHunter = peso_hunter;
     }
 
@@ -154,19 +155,19 @@ public class Hunter {
         this.tipoSanguineo = tipo_sanguineo;
     }
 
-    public Date getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public void setInicio(Date inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
-    public Date getTermino() {
+    public LocalDate getTermino() {
         return termino;
     }
 
-    public void setTermino(Date termino) {
+    public void setTermino(LocalDate termino) {
         this.termino = termino;
     }
 
@@ -190,16 +191,16 @@ public class Hunter {
 
     public String inicioFormatado() {
         if (this.inicio != null) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            return simpleDateFormat.format(this.inicio);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return this.inicio.format(formatter);
         }
         return "";
     }
 
     public String terminoFormatado() {
         if (this.termino != null) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            return simpleDateFormat.format(this.termino);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return this.termino.format(formatter);
         }
         return "";
     }
